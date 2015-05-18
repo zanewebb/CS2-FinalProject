@@ -2,4 +2,8 @@ Ideas:
 ------------------------------------------
 - Minesweeper solver
   | Probably not
-- ?
+- Evolution Simulator
+  | could be difficult
+- Something with Paul Blart / Dino Digger
+  | ?
+-
