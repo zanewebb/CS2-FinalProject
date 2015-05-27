@@ -1,0 +1,29 @@
+/*
+Types of Events
+   -Events with options
+      *Mysterious Berries
+         -Eat (Checks DR)
+         -Don't Eat
+      *Forest Clearing
+         -Hunting (Checks HE)
+         -Rest
+         -Reproduce
+         -Continue moving
+      *Attacked by other population
+         -Run (Checks Sp)
+         -Fight (Checks St and De) gain 1 ev
+      *River
+         -Build raft (Checks In)
+         -Ford river (Checks Sp and St)
+         -Swim (Requires adaptation)
+      *Climb up cliff
+         -Climb up blindly (Checks St and Adaptation)
+         -Find climbing route (Checks In)
+         -Falling rocks (Random, Checks De)
+   -Events that automatically run
+      *Catch disease (Checks DR)
+      *Trap (Checks In)
+      *Forest Fire (Checks Sp)
+      *Freak accident (-1 to pop)
+      *Cliff jump (Checks Sp)
+*/
