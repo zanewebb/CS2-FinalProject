@@ -21,12 +21,12 @@ public class Event {
       if(ans == 1){
          int x = rng.nextInt(1)+0; //50%
          if(x == 0){
-            System.out.println("The berries were poisonous! You lost " + (pop.size/5) + " monkeys!");
-            pop.size = pop.size - (pop.size/5); //5% dies
+            System.out.println("The berries were poisonous! You lost " + (pop.size*0.05) + " monkeys!");
+            pop.size = pop.size - (pop.size*0.05); //5% dies
          }
          else{
             System.out.println("You gained " + (pop.size/15) + " food.");
-            food += (pop.size/15); //add food to feed 15% of pop
+            food += (pop.size*0.15); //add food to feed 15% of pop
          }
       }
       else{
