@@ -5,7 +5,7 @@
 ## Target Users
   Gamers
 ## Project Description
-  Play as a population of an animal and progrss your stats to overcome possible events
+  Play as a population of an animal and progress your stats to overcome possible events
   and succeed as a race.
 ## Distribtuion of Work
 + Zane
