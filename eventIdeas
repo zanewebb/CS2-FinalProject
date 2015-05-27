@@ -1,4 +1,4 @@
-/*
+
 Types of Events
    -Events with options
       *Mysterious Berries
@@ -26,4 +26,3 @@ Types of Events
       *Forest Fire (Checks Sp)
       *Freak accident (-1 to pop)
       *Cliff jump (Checks Sp)
-*/
