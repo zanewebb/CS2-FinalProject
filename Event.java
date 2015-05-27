@@ -136,6 +136,7 @@ public class Event {
             System.out.println("You managed to find a safer route.");
          else{
             System.out.println("You failed to find a better route and lost " + (pop.size*0.05) + " monkeys.");
+            pop.size -= (pop.size*0.05);
             Climb();
          }
       }
