@@ -41,7 +41,13 @@ public class Event {
    }
    
    public static void ForestFire(){
-   //N
+      int prevSize = Population.size;
+      for(int i = 0; i < Population.size; i++) {
+         if(rng.nextInt(Population.Sp) == 0)
+            Population.size--;
+      }
+      int died = prevSize - Population.size;
+      System.out.println(died + " monkeys reenacted Pompeii.");
    }
    
    public static void Accident(){
@@ -50,9 +56,13 @@ public class Event {
    }
    
    public static void CliffJump(){
+      int prevSize = Population.size;
       for(int i = 0; i < Population.size; i++) {
          if(rng.nextInt(Population.Sp) == 0)
             Population.size--;
       }
+      int died = prevSize - Population.size;
+      System.out.println(died + " monkeys fell off the cliff and\n"
+                        + "severely bumped their heads.");
    }
 }
