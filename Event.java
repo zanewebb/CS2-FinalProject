@@ -37,7 +37,7 @@ public class Event {
    }
    
    public static void Trap(){
-   //N
+      int trapped = (int) (Population.size / rng.nextInt(Population.size));
    }
    
    public static void ForestFire(){
