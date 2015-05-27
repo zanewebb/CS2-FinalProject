@@ -45,15 +45,14 @@ public class Event {
    }
    
    public static void Accident(){
-   //N
+      Population.size--;
+      System.out.println("One of the monkeys in your population suffered an aneurysm");
    }
    
    public static void CliffJump(){
-      int popDecrease == 0;
       for(int i = 0; i < Population.size; i++) {
          if(rng.nextInt(Population.Sp) == 0)
-            popDecrease++;
+            Population.size--;
       }
-      Population.size =- popDecrease;
    }
 }
