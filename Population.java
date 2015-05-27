@@ -29,6 +29,7 @@ public class Population
    public Population()
    {
       size = 100;
+      morale = 50;
       food = 500;
    }
    
