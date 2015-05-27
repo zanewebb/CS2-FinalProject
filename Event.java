@@ -49,6 +49,11 @@ public class Event {
    }
    
    public static void CliffJump(){
-   //N
+      int popDecrease == 0;
+      for(int i = 0; i < Population.size; i++) {
+         if(rng.nextInt(Population.Sp) == 0)
+            popDecrease++;
+      }
+      Population.size =- popDecrease;
    }
 }
