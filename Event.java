@@ -38,12 +38,19 @@ public class Event {
    
    public static void Trap(){
       int trapped = (int) (Population.size / rng.nextInt(Population.size));
+      System.out.println(trapped + " monkeys got caught in a trap.");
+      if(Population.In >= rng.nextInt(Population.In + 1))
+         System.out.println("Congratulations your population is smart enough to free the\n"
+                           + trapped + " monkeys.");
+      else
+         System.out.println("Your population was dumb enough to accidentally set off the traps\n"
+                           + "killing " + trapped + " monkeys.");
    }
    
    public static void ForestFire(){
       int prevSize = Population.size;
       for(int i = 0; i < Population.size; i++) {
-         if(rng.nextInt(Population.Sp) == 0)
+         if(rng.nextInt(Population.Sp + 1) == 0)
             Population.size--;
       }
       int died = prevSize - Population.size;
@@ -58,7 +65,7 @@ public class Event {
    public static void CliffJump(){
       int prevSize = Population.size;
       for(int i = 0; i < Population.size; i++) {
-         if(rng.nextInt(Population.Sp) == 0)
+         if(rng.nextInt(Population.Sp + 1) == 0)
             Population.size--;
       }
       int died = prevSize - Population.size;
