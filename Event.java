@@ -33,7 +33,15 @@ public class Event {
    }
    
    public static void CatchDisease(){
-   //N
+      System.out.println("Your population has caught Neuromyelitis Optica.");
+      int deathPercent = 10;
+      deathPercent-= Population.DR;
+      int size = Population.size();
+      int dead = (int)(deathPercent * 2.5);
+      Population.size() -= dead;
+      System.out.println(dead + " monkeys had complications and went blind\n"
+                        + "and walked off a cliff.");
+      
    }
    
    public static void Trap(){
