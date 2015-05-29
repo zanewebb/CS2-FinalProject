@@ -39,7 +39,7 @@ public class Event {
       int size = Population.size();
       int dead = (int)(deathPercent * 2.5);
       Population.size() -= dead;
-      System.out.println(dead + " monkeys had complications and went blind\n"
+      System.out.println(dead + " monkeys had complications, as a result, they went blind\n"
                         + "and walked off a cliff.");
       
    }
