@@ -4,8 +4,27 @@ public class Event {
    static Random rng = new Random();
    static Scanner in = new Scanner(System.in);
    public static void RunEvent(){
-   //randomly picks event to run
-   //B
+      int x = rng.nextInt(100)+1;
+      if(x <= 5)//5%
+         MysteryBerries();
+      else if(x > 5 && x <= 25)//20%
+         Forest();
+      else if(x > 25 && x <= 35)//10%
+         Attacked();
+      else if(x > 35 && x <= 45)//10%
+         River();
+      else if(x > 45 && x <= 55)//10%
+         Climb();
+      else if(x > 55 && x <= 65)//10%
+         CatchDisease();
+      else if(x > 65 && x <= 75)//10%
+         Trap();
+      else if(x > 75 && x <= 85)//10%
+         ForestFire();
+      else if(x > 85 && x <= 90)//5%
+         Accident();
+      else if(x > 90 && x <= 100)//10%
+         CliffJump();
    }
    
    public static void MysteryBerries(){
@@ -37,9 +56,8 @@ public class Event {
    public static void Forest(){
       System.out.println("You come across a forest area");
       System.out.println("1. Go Hunting");
-      System.out.println("2. Rest");
-      System.out.println("3. Reproduce");
-      System.out.println("4. Continue Moving");
+      System.out.println("2. Reproduce");
+      System.out.println("3. Continue Moving");
       int ans = 0;
       do{
          ans = in.nextInt();
@@ -51,9 +69,6 @@ public class Event {
          food += pop.size * pop.HE;
       }
       else if(ans == 2){
-         //rest
-      }
-      else if(ans == 3){
          System.out.println("Your population doubled!");
          pop.size += pop.size;
       }
