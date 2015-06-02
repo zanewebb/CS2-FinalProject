@@ -40,8 +40,14 @@ public class Event {
       if(ans == 1){
          int x = rng.nextInt(1)+0; //50%
          if(x == 0){
-            System.out.println("The berries were poisonous! You lost " + (pop.size*0.05) + " monkeys!");
-            pop.size = pop.size - (pop.size*0.05); //5% dies
+            if(DR >= 2){
+               System.out.println("Your disease resistance helped you eat the berries successfully. You gained " + (pop.size*0.15) + " food.");
+               food += (pop.size*0.15); //add food to feed 15% of pop   
+            }
+            else {
+               System.out.println("The berries were poisonous! You lost " + (pop.size*0.05) + " monkeys!");
+               pop.size = pop.size - (pop.size*0.05); //5% dies
+            }
          }
          else{
             System.out.println("You gained " + (pop.size*0.15) + " food.");
@@ -65,8 +71,14 @@ public class Event {
             System.out.println("Invalid");
       }while(ans < 1 || ans > 4);
       if(ans == 1){
-         System.out.println("You managed to gather " + pop.size*pop.HE + " food.");
-         food += pop.size * pop.HE;
+         if(Om == true){
+            System.out.println("You gathered " + pop.size*pop.HE*1.5 + " food (Omnivore Bonus)");
+            food += pop.size*pop.HE*1.5;
+         }
+         else{
+            System.out.println("You managed to gather " + pop.size*pop.HE + " food.");
+            food += pop.size * pop.HE;
+         }
       }
       else if(ans == 2){
          System.out.println("Your population doubled!");
@@ -105,13 +117,13 @@ public class Event {
       System.out.println("You come across a river.");
       System.out.println("1. Build Raft");
       System.out.println("2. Ford River");
-      //System.out.println("3. Swim");
+      System.out.println("3. Swim");
       int ans = 0;
       do{
          ans = in.nextInt();
-         if(ans != 1 || ans != 2)
+         if(ans < 1 || ans > 3)
             System.out.println("Invalid");
-      }while(ans != 1 || ans != 2);
+      }while(ans < 1 || ans > 3);
       if(ans == 1){
          if(pop.In < 7){
             System.out.println("You were not smart enough to build a raft. You lost " + (pop.size/4) + " monkeys.");
@@ -120,7 +132,7 @@ public class Event {
          else
             System.out.println("You were smart enough to build a proper raft. You made it!");
       }
-      else{
+      else if(ans == 2){
          if(pop.Sp >= 6 && pop.St >= 6)
             System.out.println("You successfully forded the river.");
          else if(pop.Sp < 6 && pop.St < 6)
@@ -130,7 +142,15 @@ public class Event {
          else
             System.out.println("Your monkeys were too weak to ford the river.");
       }
-      //add swim option
+      else{
+         if(Sw == true){
+            System.out.println("All your monkeys swam across the river successfully!");
+         }
+         else {
+            System.out.println("Your monkeys can't swim! Lost " + pop.size/2 + " monkeys.");
+            pop.size -= (pop.size/2);
+         }
+      }
    }
    
    public static void Climb(){
