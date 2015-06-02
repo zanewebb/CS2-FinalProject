@@ -3,7 +3,7 @@ import java.io.*;
 public class Event {
    static Random rng = new Random();
    static Scanner in = new Scanner(System.in);
-   public static void RunEvent(){
+   public static void RunEvent(){//B
       int x = rng.nextInt(100)+1;
       if(x <= 5)//5%
          MysteryBerries();
