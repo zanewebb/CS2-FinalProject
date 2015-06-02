@@ -44,7 +44,7 @@ public class Event {
             pop.size = pop.size - (pop.size*0.05); //5% dies
          }
          else{
-            System.out.println("You gained " + (pop.size/15) + " food.");
+            System.out.println("You gained " + (pop.size*0.15) + " food.");
             food += (pop.size*0.15); //add food to feed 15% of pop
          }
       }
