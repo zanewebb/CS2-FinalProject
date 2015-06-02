@@ -1,9 +1,11 @@
 import java.util.*;
 import java.io.*;
 public class Event {
-   static Random rng = new Random();
-   static Scanner in = new Scanner(System.in);
-   public static void RunEvent(){
+   private Random rng = new Random();
+   private Scanner in = new Scanner(System.in);
+   private Population pop = new Population();
+   
+   public void RunEvent(){
       int x = rng.nextInt(100)+1;
       if(x <= 5)//5%
          MysteryBerries();
@@ -27,7 +29,7 @@ public class Event {
          CliffJump();
    }
    
-   public static void MysteryBerries(){
+   public void MysteryBerries(){
       System.out.println("You come across mysterious berries");
       System.out.println("1. Eat");
       System.out.println("2. Don't Eat");
@@ -40,18 +42,18 @@ public class Event {
       if(ans == 1){
          int x = rng.nextInt(1)+0; //50%
          if(x == 0){
-            if(DR >= 2){
+            if(pop.DR >= 2){
                System.out.println("Your disease resistance helped you eat the berries successfully. You gained " + (pop.size*0.15) + " food.");
-               food += (pop.size*0.15); //add food to feed 15% of pop   
+               pop.food += (pop.size*0.15); //add food to feed 15% of pop   
             }
             else {
                System.out.println("The berries were poisonous! You lost " + (pop.size*0.05) + " monkeys!");
-               pop.size = pop.size - (pop.size*0.05); //5% dies
+               pop.size = (int) (pop.size - (pop.size*0.05)); //5% dies
             }
          }
          else{
             System.out.println("You gained " + (pop.size*0.15) + " food.");
-            food += (pop.size*0.15); //add food to feed 15% of pop
+            pop.food += (pop.size*0.15); //add food to feed 15% of pop
          }
       }
       else{
@@ -59,7 +61,7 @@ public class Event {
       }
    }
    
-   public static void Forest(){
+   public void Forest(){
       System.out.println("You come across a forest area");
       System.out.println("1. Go Hunting");
       System.out.println("2. Reproduce");
@@ -71,13 +73,13 @@ public class Event {
             System.out.println("Invalid");
       }while(ans < 1 || ans > 4);
       if(ans == 1){
-         if(Om == true){
+         if(pop.Om == true){
             System.out.println("You gathered " + pop.size*pop.HE*1.5 + " food (Omnivore Bonus)");
-            food += pop.size*pop.HE*1.5;
+            pop.food += pop.size*pop.HE*1.5;
          }
          else{
             System.out.println("You managed to gather " + pop.size*pop.HE + " food.");
-            food += pop.size * pop.HE;
+            pop.food += pop.size * pop.HE;
          }
       }
       else if(ans == 2){
@@ -89,7 +91,7 @@ public class Event {
       }
    }
    
-   public static void Attacked(){
+   public void Attacked(){
       System.out.println("You are confronted by rival monkeys!");
       System.out.println("1. Fight");
       System.out.println("2. Run");
@@ -113,7 +115,7 @@ public class Event {
       }
    }
    
-   public static void River(){
+   public void River(){
       System.out.println("You come across a river.");
       System.out.println("1. Build Raft");
       System.out.println("2. Ford River");
@@ -143,7 +145,7 @@ public class Event {
             System.out.println("Your monkeys were too weak to ford the river.");
       }
       else{
-         if(Sw == true){
+         if(pop.Sw == true){
             System.out.println("All your monkeys swam across the river successfully!");
          }
          else {
@@ -153,7 +155,7 @@ public class Event {
       }
    }
    
-   public static void Climb(){
+   public void Climb(){
       System.out.println("You come across a cliff.");
       System.out.println("1. Climb up blindly");
       System.out.println("2. Find better climbing route");
@@ -177,22 +179,22 @@ public class Event {
       }
    }
    
-   public static void CatchDisease() {
+   public void CatchDisease() {
       System.out.println("Your population has caught Neuromyelitis Optica.");
       int deathPercent = 10;
-      deathPercent-= Population.DR;
-      int size = Population.size();
+      deathPercent -= pop.DR;
+      int size = pop.size;
       int dead = (int)(deathPercent * 2.5);
-      Population.size() -= dead;
+      pop.size -= dead;
       System.out.println(dead + " monkeys had complications, as a result, they went blind\n"
                         + "and walked off a cliff.");
       
    }
    
-   public static void Trap() {
-      int trapped = (int) (Population.size / rng.nextInt(Population.size));
+   public void Trap() {
+      int trapped = (int) (pop.size / rng.nextInt(pop.size));
       System.out.println(trapped + " monkeys got caught in a trap.");
-      if(Population.In >= rng.nextInt(Population.In + 1))
+      if(pop.In >= rng.nextInt(pop.In + 1))
          System.out.println("Congratulations your population is smart enough to free the\n"
                            + trapped + " monkeys.");
       else
@@ -200,32 +202,32 @@ public class Event {
                            + "killing " + trapped + " monkeys.");
    }
    
-   public static void ForestFire() {
+   public void ForestFire() {
       System.out.println("One of the monkeys in your population accidentally started\n"
                         + "a forest fire.");
-      int prevSize = Population.size;
-      for(int i = 0; i < Population.size; i++) {
-         if(rng.nextInt(Population.Sp + 1) == 0)
-            Population.size--;
+      int prevSize = pop.size;
+      for(int i = 0; i < pop.size; i++) {
+         if(rng.nextInt(pop.Sp + 1) == 0)
+            pop.size--;
       }
-      int died = prevSize - Population.size;
+      int died = prevSize - pop.size;
       System.out.println(died + " monkeys reenacted Pompeii.");
    }
    
-   public static void Accident() {
+   public void Accident() {
       System.out.println("Come quickly, there's been a terrible accident.");
-      Population.size--;
+      pop.size--;
       System.out.println("One of the monkeys in your population suffered an aneurysm");
    }
    
-   public static void CliffJump() {
+   public void CliffJump() {
       System.out.println("A wild CLIFF appears.");
-      int prevSize = Population.size;
-      for(int i = 0; i < Population.size; i++) {
-         if(rng.nextInt(Population.Sp + 1) == 0)
-            Population.size--;
+      int prevSize = pop.size;
+      for(int i = 0; i < pop.size; i++) {
+         if(rng.nextInt(pop.Sp + 1) == 0)
+            pop.size--;
       }
-      int died = prevSize - Population.size;
+      int died = prevSize - pop.size;
       System.out.println(died + " monkeys fell off the cliff and\n"
                         + "severely bumped their heads.");
    }
