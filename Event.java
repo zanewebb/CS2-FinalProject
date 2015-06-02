@@ -3,7 +3,7 @@ import java.io.*;
 public class Event {
    static Random rng = new Random();
    static Scanner in = new Scanner(System.in);
-   public static void RunEvent(){//B
+   public static void RunEvent(){
       int x = rng.nextInt(100)+1;
       if(x <= 5)//5%
          MysteryBerries();
@@ -99,13 +99,25 @@ public class Event {
          if(ans != 1 || ans != 2)
             System.out.println("Invalid");
       }while(ans != 1 || ans != 2);
-      Population pop2 = new Population();//generate rival monkeys
+      int pop2Sp = rng.nextInt(6)+1;
+      int pop2At = rng.nextInt(6)+1;
+      int pop2De = rng.nextInt(6)+1;
       if(ans == 1){
-         //fight
+         if(pop.At > pop2De){
+            System.out.println("You successfully killed the other monkeys!");
+         }
+         else if(pop.De > pop.At){
+            System.out.println("You successfully defended against the other monkeys!");
+         }
+         else{
+            System.out.println("Your monkeys were curb stomped. You lost " + pop.size*0.3 +  " monkeys.");
+            pop.size -= (pop.size*0.3);
+         }
       }
       else{
-         if(pop.Sp < pop2.Sp){//if your monkeys are slower
-            //fight
+         if(pop.Sp < pop2Sp){//if your monkeys are slower
+            System.out.println("Your monkeys were too slow to escape. You lost " + pop.size*0.3 +  " monkeys.");
+            pop.size -= (pop.size*0.3);
          }
          else{
             System.out.println("You ran away succesfully. You continue moving forward.");
@@ -164,7 +176,13 @@ public class Event {
             System.out.println("Invalid");
       }while(ans != 1 || ans != 2);
       if(ans == 1){
-         //add using adaptation
+         if(PT == true){
+            System.out.println("Your monkeys climbed successfully!");
+         }
+         else {
+            System.out.println("Your monkeys can't climb very well! Lost " + pop.size*0.2 + " monkeys.");
+            pop.size -= (pop.size*0.2);
+         }
       }
       else if(ans == 2){
          if(pop.In > 8)
