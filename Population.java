@@ -38,7 +38,7 @@ public class Population
       System.out.println("Population Size: " + size);
       System.out.println("Morale: " + morale); 
       System.out.println("Food: " + food);
-      System.out.println("---------------------------------")
+      System.out.println("----------------------");
       System.out.println("Strength: " + St);
       System.out.println("Defense: " + De); 
       System.out.println("Speed: " + Sp);
@@ -72,7 +72,7 @@ public class Population
       if(EC == true)
          output = output + "Extra Chromosome and ";  
          
-      output = output.substring(0,(output.length() - 4));
+      output = output.substring(0,(output.length() - 5));
       System.out.println(output);               
    }
 }
