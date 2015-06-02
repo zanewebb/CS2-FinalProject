@@ -158,22 +158,51 @@ public class Event {
    }
    
    public static void CatchDisease(){
-   //N
+      System.out.println("Your population has caught Neuromyelitis Optica.");
+      int deathPercent = 10;
+      deathPercent-= Population.DR;
+      int size = Population.size();
+      int dead = (int)(deathPercent * 2.5);
+      Population.size() -= dead;
+      System.out.println(dead + " monkeys had complications, as a result, they went blind\n"
+                        + "and walked off a cliff.");
+      
    }
    
    public static void Trap(){
-   //N
+      int trapped = (int) (Population.size / rng.nextInt(Population.size));
+      System.out.println(trapped + " monkeys got caught in a trap.");
+      if(Population.In >= rng.nextInt(Population.In + 1))
+         System.out.println("Congratulations your population is smart enough to free the\n"
+                           + trapped + " monkeys.");
+      else
+         System.out.println("Your population was dumb enough to accidentally set off the traps\n"
+                           + "killing " + trapped + " monkeys.");
    }
    
    public static void ForestFire(){
-   //N
+      int prevSize = Population.size;
+      for(int i = 0; i < Population.size; i++) {
+         if(rng.nextInt(Population.Sp + 1) == 0)
+            Population.size--;
+      }
+      int died = prevSize - Population.size;
+      System.out.println(died + " monkeys reenacted Pompeii.");
    }
    
    public static void Accident(){
-   //N
+      Population.size--;
+      System.out.println("One of the monkeys in your population suffered an aneurysm");
    }
    
    public static void CliffJump(){
-   //N
+      int prevSize = Population.size;
+      for(int i = 0; i < Population.size; i++) {
+         if(rng.nextInt(Population.Sp + 1) == 0)
+            Population.size--;
+      }
+      int died = prevSize - Population.size;
+      System.out.println(died + " monkeys fell off the cliff and\n"
+                        + "severely bumped their heads.");
    }
 }
