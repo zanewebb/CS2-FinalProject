@@ -25,12 +25,16 @@ public class Population
    //public boolean TF; //Thick Fur - Defense and Temperature related
    public boolean WP; //Well Prepared - Start with more food and population
    public boolean EC; //Extra Chromosome - More stat points
-
+   public int extraPoints;
+   public int evPoints;
+   
    public Population()
    {
       size = 100;
       //morale = 50;
       food = 500;
+      extraPoints = 6;
+      evPoints = 2;
       
       St = 5;
       De = 5;
