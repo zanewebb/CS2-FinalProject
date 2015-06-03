@@ -38,57 +38,57 @@ public class EvolutionTrail extends Applet implements MouseListener
       
       public void init()
       {
-         posRect1xco = 300;
-         posRect1yco = 20; 
+         posRect1xco = 270;
+         posRect1yco = 30; 
          posRect1width = 20; 
          posRect1height = 20;
          negRect1xco = 300; 
-         negRect1yco = 50; 
+         negRect1yco = 30; 
          negRect1width = 20; 
          negRect1height = 20;
          
-         posRect2xco = 300; 
-         posRect2yco = 80; 
+         posRect2xco = 270; 
+         posRect2yco = 90; 
          posRect2width = 20; 
          posRect2height = 20;
          negRect2xco = 300; 
-         negRect2yco = 110; 
+         negRect2yco = 90; 
          negRect2width = 20; 
          negRect2height = 20;
          
-         posRect3xco = 300; 
-         posRect3yco = 140; 
+         posRect3xco = 270; 
+         posRect3yco = 150; 
          posRect3width = 20; 
          posRect3height = 20;
          negRect3xco = 300; 
-         negRect3yco = 170; 
+         negRect3yco = 150; 
          negRect3width = 20; 
          negRect3height = 20;
          
-         posRect4xco = 300; 
-         posRect4yco = 200; 
+         posRect4xco = 270; 
+         posRect4yco = 210; 
          posRect4width = 20; 
          posRect4height = 20;
          negRect4xco = 300; 
-         negRect4yco = 230; 
+         negRect4yco = 210; 
          negRect4width = 20; 
          negRect4height = 20;
          
-         posRect5xco = 300; 
-         posRect5yco = 260; 
+         posRect5xco = 270; 
+         posRect5yco = 270; 
          posRect5width = 20; 
          posRect5height = 20;
          negRect5xco = 300; 
-         negRect5yco = 290; 
+         negRect5yco = 270; 
          negRect5width = 20; 
          negRect5height = 20;
          
-         posRect6xco = 300; 
-         posRect6yco = 320; 
+         posRect6xco = 270; 
+         posRect6yco = 330; 
          posRect6width = 20; 
          posRect6height = 20;
          negRect6xco = 300; 
-         negRect6yco = 350; 
+         negRect6yco = 330; 
          negRect6width = 20; 
          negRect6height = 20;
       
@@ -125,18 +125,10 @@ public class EvolutionTrail extends Applet implements MouseListener
          
          g.setColor(Color.yellow);
          
-         g.drawString("+", 306, 34);
-         g.drawString("-", 306, 64);
-         g.drawString("+", 306, 94);
-         g.drawString("-", 306, 124);
-         g.drawString("+", 306, 154);
-         g.drawString("-", 306, 184);
-         g.drawString("+", 306, 214);
-         g.drawString("-", 306, 244);
-         g.drawString("+", 306, 274);
-         g.drawString("-", 306, 304);
-         g.drawString("+", 306, 334);
-         g.drawString("-", 306, 364);
+         for(int i = 0; i < 6; i++){
+            g.drawString("+", 306, 44+60*i);
+            g.drawString(" -", 276, 44+60*i);
+         } 
          
          g.setColor(Color.black);
          
@@ -146,6 +138,12 @@ public class EvolutionTrail extends Applet implements MouseListener
          g.drawString("Intelligence: " + pop.In, 60, 230);
          g.drawString("Disease Resistance: " + pop.DR, 60, 290);
          g.drawString("Hunting Efficiency: " + pop.HE, 60, 350);
+         g.drawString("Extra Points: " + pop.extraPoints, 60, 386);
+      
+         if(posRect1Clicked == true && pop.extraPoints > 0 && pop.St <= 10){
+               pop.St++;
+               pop.extraPoints--;
+         }
       }
       
       /*
