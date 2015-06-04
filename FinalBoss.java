@@ -86,8 +86,8 @@ public class FinalBoss
       System.out.println(deadDe + " monkeys died because they weren't durable.");
       System.out.println(deadSp + " monkeys died because they were too slow.");
       System.out.println(deadIn + " monkeys died because they were too stupid.");
-      System.out.println(deadDR + " monkeys died because they were too prone to sickness.");
-      System.out.println(deadHE + " monkeys died because they weren't good enough at hunting.");
+      System.out.println(deadDR + " monkeys died because they succumbed to radiation poisoning.");
+      System.out.println(deadHE + " monkeys died because they weren't able to find a good place to attack.");
       System.out.println("-------------------------------------------------------------------");
       
       if(Pop.size <= 0)
