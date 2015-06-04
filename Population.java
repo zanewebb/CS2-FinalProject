@@ -2,15 +2,16 @@ public class Population
 {
    //General Stats
    public int size; //Population size
-   public int morale; //Morale
+   //public int morale; //Morale
    public int food; //Food
+   public int extraPoints;
    
    //Population Stats
    public int St; //Strength
    public int De; //Defense
    public int Sp; //Speed
    public int In; //Intelligence
-   public int Ch; //Charisma
+   //public int Ch; //Charisma
    public int DR; //Disease Resistance
    public int HE; //Hunting Efficiency
    
@@ -19,31 +20,56 @@ public class Population
    public boolean Sw; //Swimming - Water related
    public boolean Di; //Digging - General
    public boolean Om; //Omnivore - Can eat more stuff
-   public boolean OT; //Opposable Thumbs - General
-   public boolean We; //Weapons - Attack related
-   public boolean MI; //Musical Instruments - Morale related
-   public boolean TF; //Thick Fur - Defense and Temperature related
+   //public boolean OT; //Opposable Thumbs - General
+   //public boolean We; //Weapons - Attack related
+   //public boolean MI; //Musical Instruments - Morale related
+   //public boolean TF; //Thick Fur - Defense and Temperature related
    public boolean WP; //Well Prepared - Start with more food and population
    public boolean EC; //Extra Chromosome - More stat points
-
+   public int extraPoints;
+   public int evPoints;
+   
    public Population()
    {
       size = 100;
-      morale = 50;
+      //morale = 50;
       food = 500;
+      extraPoints = 6;
+<<<<<<< HEAD
+      evPoints = 2;
+=======
+>>>>>>> master
+      
+      St = 5;
+      De = 5;
+      Sp = 5;
+      In = 5;
+      DR = 2;
+      HE = 2;
+      
+      PT = false;
+      Sw = false;
+      Di = false;
+      Om = false;
+      //OT = false;
+      //We = false;
+      //MI = false;
+      //TF = false;
+      WP = false;
+      EC = false;
    }
    
    public void PrintStats()
    {
       System.out.println("Population Size: " + size);
-      System.out.println("Morale: " + morale); 
+      //System.out.println("Morale: " + morale); 
       System.out.println("Food: " + food);
       System.out.println("----------------------");
       System.out.println("Strength: " + St);
       System.out.println("Defense: " + De); 
       System.out.println("Speed: " + Sp);
       System.out.println("Intelligence: " + In);
-      System.out.println("Charisma: " + Ch);
+      //System.out.println("Charisma: " + Ch);
       System.out.println("Disease Resistance: " + DR);
       System.out.println("Hunting Efficiency: " + HE);
    }
@@ -59,14 +85,14 @@ public class Population
          output = output + "Digging and "; 
       if(Om == true)
          output = output + "Omnivore and "; 
-      if(OT == true)
-         output = output + "Opposable Thumbs and ";
-      if(We == true)
-         output = output + "Weapons and "; 
-      if(MI == true)
-         output = output + "Musical Instruments and ";
-      if(TF == true)
-         output = output + "Thick Fur and ";
+      //if(OT == true)
+      //   output = output + "Opposable Thumbs and ";
+      //if(We == true)
+      //   output = output + "Weapons and "; 
+      //if(MI == true)
+      //   output = output + "Musical Instruments and ";
+      //if(TF == true)
+      //   output = output + "Thick Fur and ";
       if(WP == true)
          output = output + "Well Prepared and ";
       if(EC == true)
