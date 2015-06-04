@@ -143,7 +143,7 @@ public class EvolutionTrail extends Applet implements MouseListener
             g.setColor(Color.yellow);
             
             for(int i = 0; i < 6; i++){
-               g.drawString(" -", 306, 44+60*i);
+               g.drawString("-", 306, 44+60*i);
                g.drawString("+", 276, 44+60*i);
             } 
             
