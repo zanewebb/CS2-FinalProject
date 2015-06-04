@@ -41,11 +41,8 @@ public class EvolutionTrail extends Applet implements MouseListener
       
       public void init()
       {
-<<<<<<< HEAD
          room = 1; //change to 0 once we get a title card
          
-=======
->>>>>>> master
          posRect1xco = 270;
          posRect1yco = 30; 
          posRect1width = 20; 
@@ -118,7 +115,6 @@ public class EvolutionTrail extends Applet implements MouseListener
       
       public void paint(Graphics g)
       {
-<<<<<<< HEAD
          if(room == 0){
             //paint some sort of title screen
          }
@@ -253,55 +249,6 @@ public class EvolutionTrail extends Applet implements MouseListener
                }
             }
      
-=======
-         g.setColor(Color.blue);
-         
-         g.fillRect(posRect1xco,posRect1yco,posRect1width,posRect1height);
-         g.fillRect(posRect2xco,posRect2yco,posRect2width,posRect2height);
-         g.fillRect(posRect3xco,posRect3yco,posRect3width,posRect3height);
-         g.fillRect(posRect4xco,posRect4yco,posRect4width,posRect4height);
-         g.fillRect(posRect5xco,posRect5yco,posRect5width,posRect5height);
-         g.fillRect(posRect6xco,posRect6yco,posRect6width,posRect6height);
-         
-         g.setColor(Color.red);
-         
-         g.fillRect(negRect1xco,negRect1yco,negRect1width,negRect1height);
-         g.fillRect(negRect2xco,negRect2yco,negRect2width,negRect2height);
-         g.fillRect(negRect3xco,negRect3yco,negRect3width,negRect3height);
-         g.fillRect(negRect4xco,negRect4yco,negRect4width,negRect4height);
-         g.fillRect(negRect5xco,negRect5yco,negRect5width,negRect5height);
-         g.fillRect(negRect6xco,negRect6yco,negRect6width,negRect6height);
-         
-         g.setColor(Color.yellow);
-         
-         g.drawString("+", 276, 44);
-         g.drawString("-", 306, 44);
-         g.drawString("+", 276, 104);
-         g.drawString("-", 306, 104);
-         g.drawString("+", 276, 164);
-         g.drawString("-", 306, 164);
-         g.drawString("+", 276, 224);
-         g.drawString("-", 306, 224);
-         g.drawString("+", 276, 284);
-         g.drawString("-", 306, 284);
-         g.drawString("+", 276, 344);
-         g.drawString("-", 306, 344);
-         
-         g.setColor(Color.black);
-         
-         g.drawString("Strength: " + pop.St, 60, 46);
-         g.drawString("Defense: " + pop.De, 60, 106);
-         g.drawString("Speed: " + pop.Sp, 60, 166);
-         g.drawString("Intelligence: " + pop.In, 60, 226);
-         g.drawString("Disease Resistance: " + pop.DR, 60, 286);
-         g.drawString("Hunting Efficiency: " + pop.HE, 60, 346);
-         g.drawString("Extra Points: " + pop.extraPoints, 60, 386);
-         
-         if(posRect1Clicked == true && pop.extraPoints <= 0 && pop.St <= 10);
-         {
-            pop.St++;
-            pop.extraPoints--;
->>>>>>> master
          }
       }
       
