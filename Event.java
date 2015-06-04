@@ -43,17 +43,17 @@ public class Event {
          int x = rng.nextInt(1)+0; //50%
          if(x == 0){
             if(pop.DR >= 2){
-               System.out.println("Your disease resistance helped you eat the berries successfully. You gained " + (pop.size*0.15) + " food.");
-               pop.food += (pop.size*0.15); //add food to feed 15% of pop   
+               System.out.println("Your disease resistance helped you eat the berries successfully. You gained " + Math.round(5+(pop.size*0.15)) + " food.");
+               pop.food += Math.round(5+(pop.size*0.15)); //add food to feed 15% of pop   
             }
             else {
-               System.out.println("The berries were poisonous! You lost " + (pop.size*0.05) + " monkeys!");
-               pop.size = (int) (pop.size - (pop.size*0.05)); //5% dies
+               System.out.println("The berries were poisonous! You lost " + Math.round(5+pop.size*0.05) + " monkeys!");
+               pop.size -= Math.round(5+pop.size*0.05); //5% dies
             }
          }
          else{
-            System.out.println("You gained " + (pop.size*0.15) + " food.");
-            pop.food += (pop.size*0.15); //add food to feed 15% of pop
+            System.out.println("You gained " + Math.round(5+(pop.size*0.15)) + " food.");
+            pop.food += Math.round(5+(pop.size*0.15)); //add food to feed 15% of pop
          }
       }
       else{
@@ -74,12 +74,12 @@ public class Event {
       }while(ans < 1 || ans > 4);
       if(ans == 1){
          if(pop.Om == true){
-            System.out.println("You gathered " + pop.size*pop.HE*1.5 + " food (Omnivore Bonus)");
-            pop.food += pop.size*pop.HE*1.5;
+            System.out.println("You gathered " + Math.round(pop.size*pop.HE*1.5) + " food (Omnivore Bonus)");
+            pop.food += Math.round(pop.size*pop.HE*1.5);
          }
          else{
-            System.out.println("You managed to gather " + pop.size*pop.HE + " food.");
-            pop.food += pop.size * pop.HE;
+            System.out.println("You managed to gather " + Math.round(pop.size*pop.HE) + " food.");
+            pop.food += Math.round(pop.size * pop.HE);
          }
       }
       else if(ans == 2){
@@ -112,14 +112,14 @@ public class Event {
             System.out.println("You successfully defended against the other monkeys!");
          }
          else{
-            System.out.println("Your monkeys were curb stomped. You lost " + pop.size*0.3 +  " monkeys.");
-            pop.size -= (pop.size*0.3);
+            System.out.println("Your monkeys were curb stomped. You lost " + Math.round(10+pop.size*0.3) +  " monkeys.");
+            pop.size -= Math.round(10+pop.size*0.3);
          }
       }
       else{
          if(pop.Sp < pop2Sp){//if your monkeys are slower
-            System.out.println("Your monkeys were too slow to escape. You lost " + pop.size*0.3 +  " monkeys.");
-            pop.size -= (pop.size*0.3);
+            System.out.println("Your monkeys were too slow to escape. You lost " + Math.round(10+pop.size*0.3) +  " monkeys.");
+            pop.size -= Math.round(10+pop.size*0.3);
          }
          else{
             System.out.println("You ran away succesfully. You continue moving forward.");
@@ -140,8 +140,8 @@ public class Event {
       }while(ans < 1 || ans > 3);
       if(ans == 1){
          if(pop.In < 7){
-            System.out.println("You were not smart enough to build a raft. You lost " + (pop.size/4) + " monkeys.");
-            pop.size -= (pop.size/4); //lose 25% of pop
+            System.out.println("You were not smart enough to build a raft. You lost " + Math.round(10+(pop.size/4)) + " monkeys.");
+            pop.size -= Math.round(10+(pop.size/4)); //lose 25% of pop
          }
          else
             System.out.println("You were smart enough to build a proper raft. You made it!");
@@ -149,20 +149,26 @@ public class Event {
       else if(ans == 2){
          if(pop.Sp >= 6 && pop.St >= 6)
             System.out.println("You successfully forded the river.");
-         else if(pop.Sp < 6 && pop.St < 6)
-            System.out.println("Your monkeys were too slow and weak to ford the river.");
-         else if(pop.Sp < 6)
-            System.out.println("Your monkeys were too slow to ford the river.");
-         else
-            System.out.println("Your monkeys were too weak to ford the river.");
+         else if(pop.Sp < 6 && pop.St < 6){
+            System.out.println("Your monkeys were too slow and weak to ford the river. You lost " + Math.round(10+(pop.size/4)) + " monkeys.");
+            pop.size -= Math.round(10+(pop.size/4));
+         }
+         else if(pop.Sp < 6){
+            System.out.println("Your monkeys were too slow to ford the river. You lost " + Math.round(10+(pop.size/4)) + " monkeys.");
+            pop.size -= Math.round(10+(pop.size/4));
+         }
+         else{
+            System.out.println("Your monkeys were too weak to ford the river. You lost " + Math.round(10+(pop.size/4)) + " monkeys.");
+            pop.size -= Math.round(10+(pop.size/4));
+         }
       }
       else{
          if(pop.Sw == true){
             System.out.println("All your monkeys swam across the river successfully!");
          }
          else {
-            System.out.println("Your monkeys can't swim! Lost " + pop.size/2 + " monkeys.");
-            pop.size -= (pop.size/2);
+            System.out.println("Your monkeys can't swim! Lost " + Math.round(10+pop.size/2) + " monkeys.");
+            pop.size -= Math.round(10+pop.size/2);
          }
       }
    }
@@ -182,16 +188,16 @@ public class Event {
             System.out.println("Your monkeys climbed successfully!");
          }
          else {
-            System.out.println("Your monkeys can't climb very well! Lost " + pop.size*0.2 + " monkeys.");
-            pop.size -= (pop.size*0.2);
+            System.out.println("Your monkeys can't climb very well! Lost " + Math.round(10+pop.size*0.2) + " monkeys.");
+            pop.size -= Math.round(10+pop.size*0.2);
          }
       }
       else if(ans == 2){
          if(pop.In > 8)
             System.out.println("You managed to find a safer route.");
          else{
-            System.out.println("You failed to find a better route and lost " + (pop.size*0.05) + " monkeys.");
-            pop.size -= (pop.size*0.05);
+            System.out.println("You failed to find a better route and lost " + Math.round(1+pop.size*0.05) + " monkeys.");
+            pop.size -= Math.round(1+pop.size*0.05);
             Climb(pop);
          }
       }
