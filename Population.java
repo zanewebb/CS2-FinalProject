@@ -4,6 +4,7 @@ public class Population
    public int size; //Population size
    //public int morale; //Morale
    public int food; //Food
+   public int extraPoints;
    
    //Population Stats
    public int St; //Strength
@@ -34,7 +35,10 @@ public class Population
       //morale = 50;
       food = 500;
       extraPoints = 6;
+<<<<<<< HEAD
       evPoints = 2;
+=======
+>>>>>>> master
       
       St = 5;
       De = 5;
