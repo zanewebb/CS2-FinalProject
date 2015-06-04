@@ -248,7 +248,11 @@ public class EvolutionTrail extends Applet implements MouseListener
                   g.fillRect(negRect1xco,negRect1yco+10,negRect1width,negRect1height);
                }
             }
-     
+         }
+         else if(room == 3) {
+            for(int i = 0; i < 30; i++) {
+               Event.RunEvent(pop, g);
+            }
          }
       }
       

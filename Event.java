@@ -1,33 +1,45 @@
 import java.util.*;
 import java.io.*;
+import java.awt.*;
 
 public class Event {
    private Random rng = new Random();
    private Scanner in = new Scanner(System.in);
-   public int background = 0;
+   private Image background;
    
-   public void RunEvent(Population pop){
+   public void RunEvent(Population pop, Graphics g){
       int x = rng.nextInt(100)+1;
-      if(x <= 5)//5%
+      if(x <= 5) {//5%
+         i = ImageIO.read(new URL(getCodeBase(), ""));
          MysteryBerries(pop);
-      else if(x > 5 && x <= 25)//20%
+      }
+      else if(x > 5 && x <= 25) {//20%
          Forest(pop);
-      else if(x > 25 && x <= 35)//10%
+      }
+      else if(x > 25 && x <= 35) {//10%
          Attacked(pop);
-      else if(x > 35 && x <= 45)//10%
+      }
+      else if(x > 35 && x <= 45) {//10%
          River(pop);
-      else if(x > 45 && x <= 55)//10%
+      }
+      else if(x > 45 && x <= 55) {//10%
          Climb(pop);
-      else if(x > 55 && x <= 65)//10%
+      }
+      else if(x > 55 && x <= 65) {//10%
          CatchDisease(pop);
-      else if(x > 65 && x <= 75)//10%
+      }
+      else if(x > 65 && x <= 75) {//10%
          Trap(pop);
-      else if(x > 75 && x <= 85)//10%
+      }
+      else if(x > 75 && x <= 85) {//10%
          ForestFire(pop);
-      else if(x > 85 && x <= 90)//5%
+      }
+      else if(x > 85 && x <= 90) {//5%
          Accident(pop);
-      else if(x > 90 && x <= 100)//10%
+      }
+      else if(x > 90 && x <= 100) {//10%
          CliffJump(pop);
+      }
    }
    
    public void MysteryBerries(Population pop){
