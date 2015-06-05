@@ -249,11 +249,6 @@ public class EvolutionTrail extends Applet implements MouseListener
                }
             }
          }
-         else if(room == 3) {
-            for(int i = 0; i < 30; i++) {
-               Event.RunEvent(pop, g);
-            }
-         }
       }
       
       /*
