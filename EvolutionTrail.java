@@ -49,6 +49,11 @@ public class EvolutionTrail extends Applet implements MouseListener
       private Image deadMonkey = null;
       private Image rivalMonkeys = null;
       
+      private Image pop1 = null;
+      private Image pop2 = null;
+      private Image pop3 = null;
+      private Image pop4 = null;
+      
       URL url0 = null;
       URL url1 = null;
       URL url2 = null;
@@ -62,6 +67,11 @@ public class EvolutionTrail extends Applet implements MouseListener
       
       URL dM = null;
       URL rM = null;
+      
+      URL p1 = null;
+      URL p2 = null;
+      URL p3 = null;
+      URL p4 = null;
       
       private AudioClip mainTheme = null;
       private AudioClip bossTheme = null;
@@ -81,6 +91,10 @@ public class EvolutionTrail extends Applet implements MouseListener
             url9 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Clfif.png");//not a typo, image file is spelled like this
             dM = new URL(getCodeBase(), "CS2-FinalProject/Sprites/dead monkey 2.png");
             rM = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Enemy Monkeys - 4.png");
+            p1 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 1");
+            p2 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 2");
+            p3 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 3");
+            p4 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 4");
             
             img0 = ImageIO.read(url0);
             img1 = ImageIO.read(url1);
@@ -92,6 +106,10 @@ public class EvolutionTrail extends Applet implements MouseListener
             img7 = ImageIO.read(url7);
             img8 = ImageIO.read(url8);
             img9 = ImageIO.read(url9);
+            pop1 = ImageIO.read(p1);
+            pop2 = ImageIO.read(p2);
+            pop3 = ImageIO.read(p3);
+            pop4 = ImageIO.read(p4);
             deadMonkey = ImageIO.read(dM);
             rivalMonkeys = ImageIO.read(rM);
          }catch(IOException e){
@@ -276,6 +294,14 @@ public class EvolutionTrail extends Applet implements MouseListener
                System.out.println(pop.food);
                //
                setBackground(new Color(R,G,B));
+               if(pop.size < 50)
+                  g.drawImage(pop1,0,0,this); //xy tbd
+               if(pop.size >= 50 && pop.size < 100)
+                  g.drawImage(pop2,0,0,this); //xy tbd
+               if(pop.size >= 100 && pop.size < 150)
+                  g.drawImage(pop3,0,0,this); //xy tbd
+               if(pop.size >= 150)
+                  g.drawImage(pop4,0,0,this); //xy tbd
                EV.EventSelector();
                g.drawImage(setBg(EV.getEvID()),0,0,this);
                if(EV.getEvID() == 2){
