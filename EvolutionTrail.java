@@ -62,6 +62,9 @@ public class EvolutionTrail extends Applet implements MouseListener
       URL dM = null;
       URL rM = null;
       
+      private AudioClip mainTheme = null;
+      private AudioClip bossTheme = null;
+      
       public void init()
       {
          try{
@@ -93,6 +96,9 @@ public class EvolutionTrail extends Applet implements MouseListener
             
          }catch(IOException e){
          }
+         
+         mainTheme = getAudioClip(getCodeBase(), "MonkeyThemeFinal.wav");
+         bossTheme = getAudioClip(getCodeBase(), "BadMonkeyThemeFinal.wav");
          
          setSize(8005, 3923);
          
@@ -177,6 +183,8 @@ public class EvolutionTrail extends Applet implements MouseListener
       public void paint(Graphics g)
       {
          if(room == 0){
+            mainTheme.stop(); //if they play again so two don't start playing
+            mainTheme.loop();
             //paint some sort of title screen
          }
          if(room == 2){//Stats Screen
@@ -281,6 +289,8 @@ public class EvolutionTrail extends Applet implements MouseListener
                   G -= 25;
             }while(pop.size > 1 || turns > 0);
             
+            mainTheme.stop();
+            bossTheme.loop();
             FinalBoss fb = new FinalBoss(pop);
             fb.fight();
             if(fb.isWin() == true)
@@ -290,10 +300,14 @@ public class EvolutionTrail extends Applet implements MouseListener
          }
          
          else if(room == 4){
+            bossTheme.stop();
+            mainTheme.loop();
             //you win screen
          }
          
          else if(room == 5){
+            bossTheme.stop();
+            mainTheme.loop();
             //you lose screen
          }
       }
