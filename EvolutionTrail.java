@@ -68,18 +68,18 @@ public class EvolutionTrail extends Applet implements MouseListener
       public void init()
       {
          try{
-            url0 = new URL(getCodeBase(), "/Sprites/Berries.png");
-            url1 = new URL(getCodeBase(), "/Sprites/JungleScene.png");//Forest
-            url2 = new URL(getCodeBase(), "/Sprites/JungleScene.png");//Attacked
-            url3 = new URL(getCodeBase(), "/Sprites/River.png");
-            url4 = new URL(getCodeBase(), "/Sprites/Climb.png");
-            url5 = new URL(getCodeBase(), "/Sprites/Disease.png");
-            url6 = new URL(getCodeBase(), "/Sprites/Traps.png");
-            url7 = new URL(getCodeBase(), "/Sprites/Forest Fire.png");
-            url8 = new URL(getCodeBase(), "/Sprites/JungleScene.png");//Accident
-            url9 = new URL(getCodeBase(), "/Sprites/Clfif.png");//not a typo, image file is spelled like this
-            dM = new URL(getCodeBase(), "/Sprites/dead monkey 2.png");
-            rM = new URL(getCodeBase(), "/Sprites/Enemy Monkeys - 4.png");
+            url0 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Berries.png");
+            url1 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/JungleScene.png");//Forest
+            url2 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/JungleScene.png");//Attacked
+            url3 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/River.png");
+            url4 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Climb.png");
+            url5 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Disease.png");
+            url6 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Traps.png");
+            url7 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Forest Fire.png");
+            url8 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/JungleScene.png");//Accident
+            url9 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Clfif.png");//not a typo, image file is spelled like this
+            dM = new URL(getCodeBase(), "CS2-FinalProject/Sprites/dead monkey 2.png");
+            rM = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Enemy Monkeys - 4.png");
             
             img0 = ImageIO.read(url0);
             img1 = ImageIO.read(url1);
@@ -93,12 +93,11 @@ public class EvolutionTrail extends Applet implements MouseListener
             img9 = ImageIO.read(url9);
             deadMonkey = ImageIO.read(dM);
             rivalMonkeys = ImageIO.read(rM);
-            
          }catch(IOException e){
          }
          
-         mainTheme = getAudioClip(getCodeBase(), "MonkeyThemeFinal.wav");
-         bossTheme = getAudioClip(getCodeBase(), "BadMonkeyThemeFinal.wav");
+         mainTheme = getAudioClip(getCodeBase(), "CS2-FinalProject/Music/MonkeyThemeFinal.wav");
+         bossTheme = getAudioClip(getCodeBase(), "CS2-FinalProject/Music/BadMonkeyThemeFinal.wav");
          
          setSize(8005, 3923);
          
