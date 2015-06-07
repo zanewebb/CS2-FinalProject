@@ -8,6 +8,7 @@ import java.io.IOException;
 public class EvolutionTrail extends Applet implements MouseListener
 {
       Population pop = new Population();
+      Event EV = new Event();
       int xpos;
       int ypos;
       
@@ -48,6 +49,11 @@ public class EvolutionTrail extends Applet implements MouseListener
       private Image deadMonkey = null;
       private Image rivalMonkeys = null;
       
+      private Image pop1 = null;
+      private Image pop2 = null;
+      private Image pop3 = null;
+      private Image pop4 = null;
+      
       URL url0 = null;
       URL url1 = null;
       URL url2 = null;
@@ -61,6 +67,11 @@ public class EvolutionTrail extends Applet implements MouseListener
       
       URL dM = null;
       URL rM = null;
+      
+      URL p1 = null;
+      URL p2 = null;
+      URL p3 = null;
+      URL p4 = null;
       
       private AudioClip mainTheme = null;
       private AudioClip bossTheme = null;
@@ -80,6 +91,10 @@ public class EvolutionTrail extends Applet implements MouseListener
             url9 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Clfif.png");//not a typo, image file is spelled like this
             dM = new URL(getCodeBase(), "CS2-FinalProject/Sprites/dead monkey 2.png");
             rM = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Enemy Monkeys - 4.png");
+            p1 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 1");
+            p2 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 2");
+            p3 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 3");
+            p4 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 4");
             
             img0 = ImageIO.read(url0);
             img1 = ImageIO.read(url1);
@@ -91,6 +106,10 @@ public class EvolutionTrail extends Applet implements MouseListener
             img7 = ImageIO.read(url7);
             img8 = ImageIO.read(url8);
             img9 = ImageIO.read(url9);
+            pop1 = ImageIO.read(p1);
+            pop2 = ImageIO.read(p2);
+            pop3 = ImageIO.read(p3);
+            pop4 = ImageIO.read(p4);
             deadMonkey = ImageIO.read(dM);
             rivalMonkeys = ImageIO.read(rM);
          }catch(IOException e){
@@ -267,46 +286,70 @@ public class EvolutionTrail extends Applet implements MouseListener
             g.drawString("Gives you more stat points to use.", 75, 320);
             g.drawString("Traits Left: " + pop.evPoints, 60, 386);   
          }
-         
-         else if(room == 3){//Main Game
-            int turns = 30;
-            Event EV = new Event();
+         //Clicking next advances room by two for some reason, so I skipped a room number as a quick fix
+         else if(room == 4){//Main Game;
             do{
+               //REMOVE LATER
+               System.out.println(pop.size);
+               System.out.println(pop.food);
+               //
                setBackground(new Color(R,G,B));
-               EV.RunEvent(pop);
-               g.drawImage(setBg(EV.getBg()),0,0,this);
-               if(EV.getBg() == 2){
+               if(pop.size < 50)
+                  g.drawImage(pop1,0,0,this); //xy tbd
+               if(pop.size >= 50 && pop.size < 100)
+                  g.drawImage(pop2,0,0,this); //xy tbd
+               if(pop.size >= 100 && pop.size < 150)
+                  g.drawImage(pop3,0,0,this); //xy tbd
+               if(pop.size >= 150)
+                  g.drawImage(pop4,0,0,this); //xy tbd
+               EV.EventSelector();
+               g.drawImage(setBg(EV.getEvID()),0,0,this);
+               if(EV.getEvID() == 2){
                   g.drawImage(rivalMonkeys,0,0,this); //xy tbd
                }
-               if(EV.getBg() == 8){
+               if(EV.getEvID() == 8){
                   g.drawImage(deadMonkey,0,0,this); //xy tbd
                }
+               EV.RunEvent(pop);
                turns--;
+               if(pop.food < pop.size){
+                  System.out.println("You are running out of food. " + (pop.size-pop.food) + " monkeys died of hunger.");
+                  pop.size -= (pop.size-pop.food);
+               }
+               pop.food -= pop.size;
+               if(pop.food < 0)
+                  pop.food = 0;
                if(R>0)
                   R -= 50;
                if(G>25)
                   G -= 25;
-            }while(pop.size > 1 || turns > 0);
-            
-            mainTheme.stop();
-            bossTheme.loop();
-            FinalBoss fb = new FinalBoss(pop);
-            fb.fight();
-            if(fb.isWin() == true)
-               room = 4;
-            else
-               room = 5;
-         }
-         
-         else if(room == 4){
-            bossTheme.stop();
-            mainTheme.loop();
-            //you win screen
+            }while(pop.size > 1 && turns > 0);
+            System.out.println(pop.size); //REMOVE LATER
+            if(pop.size < 2)
+               room = 6;
+            else{
+               mainTheme.stop();
+               bossTheme.loop();
+               FinalBoss fb = new FinalBoss(pop);
+               fb.fight();
+               if(fb.isWin() == true)
+                  room = 5;
+               else
+                  room = 6;
+            }
          }
          
          else if(room == 5){
             bossTheme.stop();
             mainTheme.loop();
+            System.out.println("You win");
+            //you win screen
+         }
+         
+         else if(room == 6){
+            bossTheme.stop();
+            mainTheme.loop();
+            System.out.println("You lose");
             //you lose screen
          }
       }

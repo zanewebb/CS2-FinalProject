@@ -4,43 +4,66 @@ import java.io.*;
 public class Event {
    private Random rng = new Random();
    private Scanner in = new Scanner(System.in);
-   int bg;
+   int ans;
+   int evID;
    
-   public void RunEvent(Population pop){
+   public void EventSelector(){
       int x = rng.nextInt(100)+1;
       if(x <= 5)//5%
-         MysteryBerries(pop);
+         evID = 0;
       else if(x > 5 && x <= 25)//20%
-         Forest(pop);
+         evID = 1;
       else if(x > 25 && x <= 35)//10%
-         Attacked(pop);
+         evID = 2;
       else if(x > 35 && x <= 45)//10%
-         River(pop);
+         evID = 3;
       else if(x > 45 && x <= 55)//10%
-         Climb(pop);
+         evID = 4;
       else if(x > 55 && x <= 65)//10%
-         CatchDisease(pop);
+         evID = 5;
       else if(x > 65 && x <= 75)//10%
-         Trap(pop);
+         evID = 6;
       else if(x > 75 && x <= 85)//10%
-         ForestFire(pop);
+         evID = 7;
       else if(x > 85 && x <= 90)//5%
-         Accident(pop);
+         evID = 8;
       else if(x > 90 && x <= 100)//10%
+         evID = 9;
+   }
+   
+   public void RunEvent(Population pop){
+      if(evID == 0)
+         MysteryBerries(pop);
+      else if(evID == 1)
+         Forest(pop);
+      else if(evID == 2)
+         Attacked(pop);
+      else if(evID == 3)
+         River(pop);
+      else if(evID == 4)
+         Climb(pop);
+      else if(evID == 5)
+         CatchDisease(pop);
+      else if(evID == 6)
+         Trap(pop);
+      else if(evID == 7)
+         ForestFire(pop);
+      else if(evID == 8)
+         Accident(pop);
+      else if(evID == 9)
          CliffJump(pop);
    }
    
    public void MysteryBerries(Population pop){
-      bg = 0;
       System.out.println("You come across mysterious berries");
       System.out.println("1. Eat");
       System.out.println("2. Don't Eat");
-      int ans = 0;
+      ans = 0;
       do{
          ans = in.nextInt();
-         if(ans != 1 || ans != 2)
+         if(ans < 1 || ans > 2)
             System.out.println("Invalid");
-      }while(ans != 1 || ans != 2);
+      }while(ans < 1 || ans > 2);
       if(ans == 1){
          int x = rng.nextInt(1)+0; //50%
          if(x == 0){
@@ -64,17 +87,16 @@ public class Event {
    }
    
    public void Forest(Population pop){
-      bg = 1;
       System.out.println("You come across a forest area");
       System.out.println("1. Go Hunting");
       System.out.println("2. Reproduce");
       System.out.println("3. Continue Moving");
-      int ans = 0;
+      ans = 0;
       do{
          ans = in.nextInt();
-         if(ans < 1 || ans > 4)
+         if(ans < 1 || ans > 3)
             System.out.println("Invalid");
-      }while(ans < 1 || ans > 4);
+      }while(ans < 1 || ans > 3);
       if(ans == 1){
          if(pop.Om == true){
             System.out.println("You gathered " + Math.round(pop.size*pop.HE*1.5) + " food (Omnivore Bonus)");
@@ -95,16 +117,15 @@ public class Event {
    }
    
    public void Attacked(Population pop){
-      bg = 2;
       System.out.println("You are confronted by rival monkeys!");
       System.out.println("1. Fight");
       System.out.println("2. Run");
-      int ans = 0;
+      ans = 0;
       do{
          ans = in.nextInt();
-         if(ans != 1 || ans != 2)
+         if(ans < 1 || ans > 2)
             System.out.println("Invalid");
-      }while(ans != 1 || ans != 2);
+      }while(ans < 1 || ans > 2);
       int pop2Sp = rng.nextInt(6)+1;
       int pop2At = rng.nextInt(6)+1;
       int pop2De = rng.nextInt(6)+1;
@@ -132,12 +153,11 @@ public class Event {
    }
    
    public void River(Population pop){
-      bg = 3;
       System.out.println("You come across a river.");
       System.out.println("1. Build Raft");
       System.out.println("2. Ford River");
       System.out.println("3. Swim");
-      int ans = 0;
+      ans = 0;
       do{
          ans = in.nextInt();
          if(ans < 1 || ans > 3)
@@ -179,16 +199,15 @@ public class Event {
    }
    
    public void Climb(Population pop){
-      bg = 4;
       System.out.println("You come across a cliff.");
       System.out.println("1. Climb up blindly");
       System.out.println("2. Find better climbing route");
-      int ans = 0;
+      ans = 0;
       do{
          ans = in.nextInt();
-         if(ans != 1 || ans != 2)
+         if(ans < 1 || ans > 2)
             System.out.println("Invalid");
-      }while(ans != 1 || ans != 2);
+      }while(ans < 1 || ans > 2);
       if(ans == 1){
          if(pop.PT == true){
             System.out.println("Your monkeys climbed successfully!");
@@ -210,7 +229,6 @@ public class Event {
    }
    
    public void CatchDisease(Population pop) {
-      bg = 5;
       System.out.println("Your population has caught Neuromyelitis Optica.");
       int deathPercent = 10;
       deathPercent -= pop.DR;
@@ -223,7 +241,6 @@ public class Event {
    }
    
    public void Trap(Population pop) {
-      bg = 6;
       int trapped = (int) (pop.size / rng.nextInt(pop.size));
       System.out.println(trapped + " monkeys got caught in a trap.");
       if(pop.In >= rng.nextInt(pop.In + 1))
@@ -235,7 +252,6 @@ public class Event {
    }
    
    public void ForestFire(Population pop) {
-      bg = 7;
       System.out.println("One of the monkeys in your population accidentally started\n"
                         + "a forest fire.");
       int prevSize = pop.size;
@@ -248,14 +264,12 @@ public class Event {
    }
    
    public void Accident(Population pop) {
-      bg = 8;
       System.out.println("Come quickly, there's been a terrible accident.");
       pop.size--;
       System.out.println("One of the monkeys in your population suffered an aneurysm");
    }
    
    public void CliffJump(Population pop) {
-      bg = 9;
       System.out.println("A wild CLIFF appears.");
       int prevSize = pop.size;
       for(int i = 0; i < pop.size; i++) {
@@ -267,7 +281,7 @@ public class Event {
                         + "severely bumped their heads.");
    }
    
-   public int getBg(){
-      return bg;
+   public int getEvID(){
+      return evID;   
    }
 }
