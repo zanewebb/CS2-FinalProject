@@ -8,6 +8,7 @@ import java.io.IOException;
 public class EvolutionTrail extends Applet implements MouseListener
 {
       Population pop = new Population();
+      Event EV = new Event();
       int xpos;
       int ypos;
       
@@ -267,46 +268,62 @@ public class EvolutionTrail extends Applet implements MouseListener
             g.drawString("Gives you more stat points to use.", 75, 320);
             g.drawString("Traits Left: " + pop.evPoints, 60, 386);   
          }
-         
-         else if(room == 3){//Main Game
-            int turns = 30;
-            Event EV = new Event();
+         //Clicking next advances room by two for some reason, so I skipped a room number as a quick fix
+         else if(room == 4){//Main Game;
             do{
+               //REMOVE LATER
+               System.out.println(pop.size);
+               System.out.println(pop.food);
+               //
                setBackground(new Color(R,G,B));
-               EV.RunEvent(pop);
-               g.drawImage(setBg(EV.getBg()),0,0,this);
-               if(EV.getBg() == 2){
+               EV.EventSelector();
+               g.drawImage(setBg(EV.getEvID()),0,0,this);
+               if(EV.getEvID() == 2){
                   g.drawImage(rivalMonkeys,0,0,this); //xy tbd
                }
-               if(EV.getBg() == 8){
+               if(EV.getEvID() == 8){
                   g.drawImage(deadMonkey,0,0,this); //xy tbd
                }
+               EV.RunEvent(pop);
                turns--;
+               if(pop.food < pop.size){
+                  System.out.println("You are running out of food. " + (pop.size-pop.food) + " monkeys died of hunger.");
+                  pop.size -= (pop.size-pop.food);
+               }
+               pop.food -= pop.size;
+               if(pop.food < 0)
+                  pop.food = 0;
                if(R>0)
                   R -= 50;
                if(G>25)
                   G -= 25;
-            }while(pop.size > 1 || turns > 0);
-            
-            mainTheme.stop();
-            bossTheme.loop();
-            FinalBoss fb = new FinalBoss(pop);
-            fb.fight();
-            if(fb.isWin() == true)
-               room = 4;
-            else
-               room = 5;
-         }
-         
-         else if(room == 4){
-            bossTheme.stop();
-            mainTheme.loop();
-            //you win screen
+            }while(pop.size > 1 && turns > 0);
+            System.out.println(pop.size); //REMOVE LATER
+            if(pop.size < 2)
+               room = 6;
+            else{
+               mainTheme.stop();
+               bossTheme.loop();
+               FinalBoss fb = new FinalBoss(pop);
+               fb.fight();
+               if(fb.isWin() == true)
+                  room = 5;
+               else
+                  room = 6;
+            }
          }
          
          else if(room == 5){
             bossTheme.stop();
             mainTheme.loop();
+            System.out.println("You win");
+            //you win screen
+         }
+         
+         else if(room == 6){
+            bossTheme.stop();
+            mainTheme.loop();
+            System.out.println("You lose");
             //you lose screen
          }
       }
