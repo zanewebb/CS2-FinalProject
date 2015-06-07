@@ -1,12 +1,20 @@
 import java.awt.*;
 import java.applet.*;
 import java.awt.event.*;
+import java.net.URL;
+import javax.imageio.ImageIO;
+import java.io.IOException;
 
 public class EvolutionTrail extends Applet implements MouseListener
 {
       Population pop = new Population();
       int xpos;
       int ypos;
+      
+      int turns;
+      int R;
+      int G;
+      int B;
       
       int posRect1xco,posRect1yco,posRect1width,posRect1height;
       int negRect1xco,negRect1yco,negRect1width,negRect1height;
@@ -26,8 +34,80 @@ public class EvolutionTrail extends Applet implements MouseListener
       
       int room; //This determines which screen is showing (0 = Title screen 1 = Stats, 2 = Ev Traits,
       
+      private Image img0 = null;
+      private Image img1 = null;
+      private Image img2 = null;
+      private Image img3 = null;
+      private Image img4 = null;
+      private Image img5 = null;
+      private Image img6 = null;
+      private Image img7 = null;
+      private Image img8 = null;
+      private Image img9 = null;
+      
+      private Image deadMonkey = null;
+      private Image rivalMonkeys = null;
+      
+      URL url0 = null;
+      URL url1 = null;
+      URL url2 = null;
+      URL url3 = null;
+      URL url4 = null;
+      URL url5 = null;
+      URL url6 = null;
+      URL url7 = null;
+      URL url8 = null;
+      URL url9 = null;
+      
+      URL dM = null;
+      URL rM = null;
+      
+      private AudioClip mainTheme = null;
+      private AudioClip bossTheme = null;
+      
       public void init()
       {
+         try{
+            url0 = new URL(getCodeBase(), "/Sprites/Berries.png");
+            url1 = new URL(getCodeBase(), "/Sprites/JungleScene.png");//Forest
+            url2 = new URL(getCodeBase(), "/Sprites/JungleScene.png");//Attacked
+            url3 = new URL(getCodeBase(), "/Sprites/River.png");
+            url4 = new URL(getCodeBase(), "/Sprites/Climb.png");
+            url5 = new URL(getCodeBase(), "/Sprites/Disease.png");
+            url6 = new URL(getCodeBase(), "/Sprites/Traps.png");
+            url7 = new URL(getCodeBase(), "/Sprites/Forest Fire.png");
+            url8 = new URL(getCodeBase(), "/Sprites/JungleScene.png");//Accident
+            url9 = new URL(getCodeBase(), "/Sprites/Clfif.png");//not a typo, image file is spelled like this
+            dM = new URL(getCodeBase(), "/Sprites/dead monkey 2.png");
+            rM = new URL(getCodeBase(), "/Sprites/Enemy Monkeys - 4.png");
+            
+            img0 = ImageIO.read(url0);
+            img1 = ImageIO.read(url1);
+            img2 = ImageIO.read(url2);
+            img3 = ImageIO.read(url3);
+            img4 = ImageIO.read(url4);
+            img5 = ImageIO.read(url5);
+            img6 = ImageIO.read(url6);
+            img7 = ImageIO.read(url7);
+            img8 = ImageIO.read(url8);
+            img9 = ImageIO.read(url9);
+            deadMonkey = ImageIO.read(dM);
+            rivalMonkeys = ImageIO.read(rM);
+            
+         }catch(IOException e){
+         }
+         
+         mainTheme = getAudioClip(getCodeBase(), "MonkeyThemeFinal.wav");
+         bossTheme = getAudioClip(getCodeBase(), "BadMonkeyThemeFinal.wav");
+         
+         setSize(8005, 3923);
+         
+         R = 150;
+         G = 200;
+         B = 255;
+         
+         turns = 30;
+         
          room = 1; //change to 0 once we get a title card
          
          posRect1xco = 270;
@@ -103,6 +183,8 @@ public class EvolutionTrail extends Applet implements MouseListener
       public void paint(Graphics g)
       {
          if(room == 0){
+            mainTheme.stop(); //if they play again so two don't start playing
+            mainTheme.loop();
             //paint some sort of title screen
          }
          if(room == 2){//Stats Screen
@@ -185,6 +267,48 @@ public class EvolutionTrail extends Applet implements MouseListener
             g.drawString("Extra Chromosome", 60, 290);
             g.drawString("Gives you more stat points to use.", 75, 320);
             g.drawString("Traits Left: " + pop.evPoints, 60, 386);   
+         }
+         
+         else if(room == 3){//Main Game
+            int turns = 30;
+            Event EV = new Event();
+            do{
+               setBackground(new Color(R,G,B));
+               EV.RunEvent(pop);
+               g.drawImage(setBg(EV.getBg()),0,0,this);
+               if(EV.getBg() == 2){
+                  g.drawImage(rivalMonkeys,0,0,this); //xy tbd
+               }
+               if(EV.getBg() == 8){
+                  g.drawImage(deadMonkey,0,0,this); //xy tbd
+               }
+               turns--;
+               if(R>0)
+                  R -= 50;
+               if(G>25)
+                  G -= 25;
+            }while(pop.size > 1 || turns > 0);
+            
+            mainTheme.stop();
+            bossTheme.loop();
+            FinalBoss fb = new FinalBoss(pop);
+            fb.fight();
+            if(fb.isWin() == true)
+               room = 4;
+            else
+               room = 5;
+         }
+         
+         else if(room == 4){
+            bossTheme.stop();
+            mainTheme.loop();
+            //you win screen
+         }
+         
+         else if(room == 5){
+            bossTheme.stop();
+            mainTheme.loop();
+            //you lose screen
          }
       }
       
@@ -320,6 +444,41 @@ public class EvolutionTrail extends Applet implements MouseListener
                room++;
          repaint();
          me.consume();          
+      }
+      
+      public Image setBg(int x){
+         if(x == 0){
+            return img0;
+         }
+         else if(x == 1){
+            return img1;
+         }
+         else if(x == 2){
+            return img2;
+         }
+         else if(x == 3){
+            return img3;
+         }
+         else if(x == 4){
+            return img4;
+         }
+         else if(x == 5){
+            return img5;
+         }
+         else if(x == 6){
+            return img6;
+         }
+         else if(x == 7){
+            return img7;
+         }
+         else if(x == 8){
+            return img8;
+         }
+         else if(x == 9){
+            return img9;
+         }
+         else
+            return null;
       }
        
       public void mouseEntered (MouseEvent me) {} 

@@ -109,4 +109,8 @@ public class FinalBoss
          win = true;
       }
    }
+   
+   public boolean isWin(){
+      return win;
+   }
 }

@@ -4,6 +4,7 @@ import java.io.*;
 public class Event {
    private Random rng = new Random();
    private Scanner in = new Scanner(System.in);
+   int bg;
    
    public void RunEvent(Population pop){
       int x = rng.nextInt(100)+1;
@@ -30,6 +31,7 @@ public class Event {
    }
    
    public void MysteryBerries(Population pop){
+      bg = 0;
       System.out.println("You come across mysterious berries");
       System.out.println("1. Eat");
       System.out.println("2. Don't Eat");
@@ -62,6 +64,7 @@ public class Event {
    }
    
    public void Forest(Population pop){
+      bg = 1;
       System.out.println("You come across a forest area");
       System.out.println("1. Go Hunting");
       System.out.println("2. Reproduce");
@@ -92,6 +95,7 @@ public class Event {
    }
    
    public void Attacked(Population pop){
+      bg = 2;
       System.out.println("You are confronted by rival monkeys!");
       System.out.println("1. Fight");
       System.out.println("2. Run");
@@ -128,6 +132,7 @@ public class Event {
    }
    
    public void River(Population pop){
+      bg = 3;
       System.out.println("You come across a river.");
       System.out.println("1. Build Raft");
       System.out.println("2. Ford River");
@@ -174,6 +179,7 @@ public class Event {
    }
    
    public void Climb(Population pop){
+      bg = 4;
       System.out.println("You come across a cliff.");
       System.out.println("1. Climb up blindly");
       System.out.println("2. Find better climbing route");
@@ -204,6 +210,7 @@ public class Event {
    }
    
    public void CatchDisease(Population pop) {
+      bg = 5;
       System.out.println("Your population has caught Neuromyelitis Optica.");
       int deathPercent = 10;
       deathPercent -= pop.DR;
@@ -216,6 +223,7 @@ public class Event {
    }
    
    public void Trap(Population pop) {
+      bg = 6;
       int trapped = (int) (pop.size / rng.nextInt(pop.size));
       System.out.println(trapped + " monkeys got caught in a trap.");
       if(pop.In >= rng.nextInt(pop.In + 1))
@@ -227,6 +235,7 @@ public class Event {
    }
    
    public void ForestFire(Population pop) {
+      bg = 7;
       System.out.println("One of the monkeys in your population accidentally started\n"
                         + "a forest fire.");
       int prevSize = pop.size;
@@ -239,12 +248,14 @@ public class Event {
    }
    
    public void Accident(Population pop) {
+      bg = 8;
       System.out.println("Come quickly, there's been a terrible accident.");
       pop.size--;
       System.out.println("One of the monkeys in your population suffered an aneurysm");
    }
    
    public void CliffJump(Population pop) {
+      bg = 9;
       System.out.println("A wild CLIFF appears.");
       int prevSize = pop.size;
       for(int i = 0; i < pop.size; i++) {
@@ -254,5 +265,9 @@ public class Event {
       int died = prevSize - pop.size;
       System.out.println(died + " monkeys fell off the cliff and\n"
                         + "severely bumped their heads.");
+   }
+   
+   public int getBg(){
+      return bg;
    }
 }
