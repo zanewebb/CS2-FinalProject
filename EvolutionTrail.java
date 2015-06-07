@@ -151,18 +151,10 @@ public class EvolutionTrail extends Applet implements MouseListener
       
          addMouseListener(this);
       } 
-     
-      /*
-         Create a method for the beginning of the game
-         where you can click buttons to add to your stats.
-         Also, be able to choose your two traits for your
-         population. Possibly make this a different screen 
-         where it has a list of them and maybe a short description.
-      */
       
       public void paint(Graphics g)
       {
-         if(room == 0){
+         if(room == 0){//Title Screen
             mainTheme.stop(); //if they play again so two don't start playing
             mainTheme.loop();
             //paint some sort of title screen
@@ -250,7 +242,7 @@ public class EvolutionTrail extends Applet implements MouseListener
             g.drawString("Traits Left: " + pop.evPoints, 60, 386);   
          }
          //Clicking next advances room by two for some reason, so I skipped a room number as a quick fix
-         else if(room == 4){//Main Game;
+         else if(room == 4){//Main Game
             do{
                //REMOVE LATER
                System.out.println(pop.size);
@@ -316,20 +308,6 @@ public class EvolutionTrail extends Applet implements MouseListener
             //you lose screen
          }
       }
-      
-      /*
-         Create a method that randomly chooses which
-         event happens when you go to the next screen.
-         Make some events more likely than others
-         like the clearing and small traps. 
-         (Most likely nested inside the "room 3" if statement)
-      */
-      
-      /*
-         Need to make a boss/big end game event to
-         test the player's population and see if they
-         survive. 
-      */
       
       public void mousePressed (MouseEvent me) 
       {
