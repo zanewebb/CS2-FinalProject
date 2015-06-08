@@ -61,8 +61,13 @@ public class EvolutionTrail extends Applet implements MouseListener
       private AudioClip mainTheme = null;
       private AudioClip bossTheme = null;
       
+      boolean mainIsPlaying;
+      boolean bossIsPlaying;
+      
       public void init()
       {
+         mainIsPlaying = false;
+         bossIsPlaying = false;
          img0 = getImage(getCodeBase(), "Sprites/Berries.png");
          img1 = getImage(getCodeBase(), "Sprites/JungleScene.png");//Forest
          img2 = getImage(getCodeBase(), "Sprites/JungleScene.png");//Attacked
@@ -151,17 +156,14 @@ public class EvolutionTrail extends Applet implements MouseListener
          nextButtonyco = 372;
          nextButtonWidth = 50;
          nextButtonHeight = 20;
-      
+         
+         setBackground(Color.white);
+         
          addMouseListener(this);
       } 
       
       public void paint(Graphics g)
       {
-         if(room == 0){//Title Screen
-            mainTheme.stop(); //if they play again so two don't start playing
-            mainTheme.loop();
-            //paint some sort of title screen
-         }
          if(room == 2){//Stats Screen
             g.setColor(Color.blue);
             
@@ -205,7 +207,10 @@ public class EvolutionTrail extends Applet implements MouseListener
             g.drawString("Extra Points: " + pop.extraPoints, 60, 386);
          }
          else if(room == 1){//Evolution Traits Screen
-            mainTheme.loop();          
+            if(mainIsPlaying == false){
+               mainTheme.loop();
+               mainIsPlaying = true;
+            }    
             g.setColor(Color.gray);//reusing prev rectangles to save space
             g.fillRect(nextButtonxco,nextButtonyco,nextButtonWidth,nextButtonHeight);
             if(pop.PT == true)
@@ -246,7 +251,7 @@ public class EvolutionTrail extends Applet implements MouseListener
          }
          //Clicking next advances room by two for some reason, so I skipped a room number as a quick fix
          else if(room == 4){//Main Game
-            do{
+            if(pop.size > 1 && turns > 0){
                //REMOVE LATER
                System.out.println(pop.size);
                System.out.println(pop.food);
@@ -254,11 +259,11 @@ public class EvolutionTrail extends Applet implements MouseListener
                setBackground(new Color(R,G,B));
                if(pop.size < 50)
                   g.drawImage(pop1,0,0,this); //xy tbd
-               if(pop.size >= 50 && pop.size < 100)
+               else if(pop.size >= 50 && pop.size < 100)
                   g.drawImage(pop2,0,0,this); //xy tbd
-               if(pop.size >= 100 && pop.size < 150)
+               else if(pop.size >= 100 && pop.size < 150)
                   g.drawImage(pop3,0,0,this); //xy tbd
-               if(pop.size >= 150)
+               else
                   g.drawImage(pop4,0,0,this); //xy tbd
                EV.EventSelector();
                g.drawImage(setBg(EV.getEvID()),0,0,this);
@@ -281,13 +286,16 @@ public class EvolutionTrail extends Applet implements MouseListener
                   R -= 50;
                if(G>25)
                   G -= 25;
-            }while(pop.size > 1 && turns > 0);
+       
+            }
             System.out.println(pop.size); //REMOVE LATER
             if(pop.size < 2)
                room = 6;
             else{
                mainTheme.stop();
+               mainIsPlaying = false;
                bossTheme.loop();
+               mainIsPlaying = true;
                FinalBoss fb = new FinalBoss(pop);
                fb.fight();
                if(fb.isWin() == true)
@@ -299,14 +307,18 @@ public class EvolutionTrail extends Applet implements MouseListener
          
          else if(room == 5){
             bossTheme.stop();
+            bossIsPlaying = false;
             mainTheme.loop();
+            mainIsPlaying = true;
             System.out.println("You win");
             //you win screen
          }
          
          else if(room == 6){
             bossTheme.stop();
+            bossIsPlaying = false;
             mainTheme.loop();
+            mainIsPlaying = true;
             System.out.println("You lose");
             //you lose screen
          }
@@ -486,5 +498,5 @@ public class EvolutionTrail extends Applet implements MouseListener
       		paint(doubleG);
       		
       		g.drawImage(backBuffer, 0 ,0, this);
-      	} 
+      }
    }
