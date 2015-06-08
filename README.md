@@ -9,13 +9,13 @@
   and succeed in a fight against the evil gorilla
 ## Distribtuion of Work
 + Zane
-  - Graphics
+  - Graphics (creating backgrounds and animal sprites)
 + Max
-  - Population/Character
+  - Population/Character(Created population atrributes and how they are modified)
 + Ben
-  - Events
-  - Image integration
-  - Music
+  - Events (created events that the monkeys face)
+  - Image integration (use of images in the code)
+  - Music (Created boss and normal music)
 + Nick
-  - Event Options
-  - Image integration
+  - Event Options (created events)
+  - Image integration (edited code to use the images)
