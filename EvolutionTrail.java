@@ -8,6 +8,9 @@ import java.io.IOException;
 
 public class EvolutionTrail extends Applet implements MouseListener
 {
+      private Image backBuffer;
+      private Graphics doubleG;
+      
       Population pop = new Population();
       Event EV = new Event();
       int xpos;
@@ -467,5 +470,21 @@ public class EvolutionTrail extends Applet implements MouseListener
       public void mouseEntered (MouseEvent me) {} 
       public void mouseClicked (MouseEvent me) {} 
       public void mouseReleased (MouseEvent me) {}  
-      public void mouseExited (MouseEvent me) {}  
+      public void mouseExited (MouseEvent me) {} 
+      
+      @Override
+	   public void update(Graphics g) //double buffering
+   	{
+       	if(backBuffer == null)
+     		{
+     			backBuffer = createImage(this.getSize().width, this.getSize().height);	
+     			doubleG = backBuffer.getGraphics();
+      	}
+      		doubleG.setColor(getBackground());
+      		doubleG.fillRect(0, 0, this.getSize().width, this.getSize().height);
+      		doubleG.setColor(getForeground());
+      		paint(doubleG);
+      		
+      		g.drawImage(backBuffer, 0 ,0, this);
+      	} 
    }
