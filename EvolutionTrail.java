@@ -58,6 +58,8 @@ public class EvolutionTrail extends Applet implements MouseListener
       private Image pop3 = null;
       private Image pop4 = null;
       
+      private Image boss = null;
+      
       private AudioClip mainTheme = null;
       private AudioClip bossTheme = null;
       
@@ -84,6 +86,8 @@ public class EvolutionTrail extends Applet implements MouseListener
          pop2 = getImage(getCodeBase(), "Sprites/SpiderMonkey - 2.png");
          pop3 = getImage(getCodeBase(), "Sprites/SpiderMonkey - 3.png");
          pop4 = getImage(getCodeBase(), "Sprites/SpiderMonkey - 4.png");
+         boss = getImage(getCodeBase(), "Sprites/Gorilla2.png");
+         
          
          mainTheme = getAudioClip(getCodeBase(), "Music/MonkeySongFinal.wav");
          bossTheme = getAudioClip(getCodeBase(), "Music/BadMonkeySongFinal.wav");
@@ -288,20 +292,31 @@ public class EvolutionTrail extends Applet implements MouseListener
                   G -= 25;
        
             }
-            System.out.println(pop.size); //REMOVE LATER
-            if(pop.size < 2)
-               room = 6;
             else{
-               mainTheme.stop();
-               mainIsPlaying = false;
-               bossTheme.loop();
-               mainIsPlaying = true;
-               FinalBoss fb = new FinalBoss(pop);
-               fb.fight();
-               if(fb.isWin() == true)
-                  room = 5;
-               else
+               System.out.println(pop.size); //REMOVE LATER
+               if(pop.size < 2)
                   room = 6;
+               else{
+                  g.drawImage(boss,0,0,this);
+                  if(pop.size < 50)
+                     g.drawImage(pop1,0,0,this); //xy tbd
+                  else if(pop.size >= 50 && pop.size < 100)
+                     g.drawImage(pop2,0,0,this); //xy tbd
+                  else if(pop.size >= 100 && pop.size < 150)
+                     g.drawImage(pop3,0,0,this); //xy tbd
+                  else
+                     g.drawImage(pop4,0,0,this); //xy tbd
+                  mainTheme.stop();
+                  mainIsPlaying = false;
+                  bossTheme.loop();
+                  mainIsPlaying = true;
+                  FinalBoss fb = new FinalBoss(pop);
+                  fb.fight();
+                  if(fb.isWin() == true)
+                     room = 5;
+                  else
+                     room = 6;
+               }
             }
          }
          
