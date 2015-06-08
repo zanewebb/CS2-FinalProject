@@ -241,7 +241,7 @@ public class Event {
    }
    
    public void Trap(Population pop) {
-      int trapped = (int) (pop.size / rng.nextInt(pop.size));
+      int trapped = (int) (pop.size / (rng.nextInt(pop.size)+1));
       System.out.println(trapped + " monkeys got caught in a trap.");
       if(pop.In >= rng.nextInt(pop.In + 1))
          System.out.println("Congratulations your population is smart enough to free the\n"

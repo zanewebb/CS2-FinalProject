@@ -63,27 +63,27 @@ public class EvolutionTrail extends Applet implements MouseListener
       
       public void init()
       {
-         img0 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Berries.png");
-         img1 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/JungleScene.png");//Forest
-         img2 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/JungleScene.png");//Attacked
-         img3 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/River.png");
-         img4 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Climb.png");
-         img5 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Disease.png");
-         img6 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Traps.png");
-         img7 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Forest Fire.png");
-         img8 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/JungleScene.png");//Accident
-         img9 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Clfif.png");//not a typo, image file is spelled like this
-         deadMonkey = getImage(getCodeBase(), "CS2-FinalProject/Sprites/dead monkey 2.png");
-         rivalMonkeys = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Enemy Monkeys - 4.png");
-         pop1 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 1");
-         pop2 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 2");
-         pop3 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 3");
-         pop4 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 4");
+         img0 = getImage(getCodeBase(), "Sprites/Berries.png");
+         img1 = getImage(getCodeBase(), "Sprites/JungleScene.png");//Forest
+         img2 = getImage(getCodeBase(), "Sprites/JungleScene.png");//Attacked
+         img3 = getImage(getCodeBase(), "Sprites/River.png");
+         img4 = getImage(getCodeBase(), "Sprites/Climb.png");
+         img5 = getImage(getCodeBase(), "Sprites/Disease.png");
+         img6 = getImage(getCodeBase(), "Sprites/Traps.png");
+         img7 = getImage(getCodeBase(), "Sprites/Forest Fire.png");
+         img8 = getImage(getCodeBase(), "Sprites/JungleScene.png");//Accident
+         img9 = getImage(getCodeBase(), "Sprites/Clfif.png");//not a typo, image file is spelled like this
+         deadMonkey = getImage(getCodeBase(), "Sprites/dead monkey 2.png");
+         rivalMonkeys = getImage(getCodeBase(), "Sprites/Enemy Monkeys - 4.png");
+         pop1 = getImage(getCodeBase(), "Sprites/SpiderMonkey - 1.png");
+         pop2 = getImage(getCodeBase(), "Sprites/SpiderMonkey - 2.png");
+         pop3 = getImage(getCodeBase(), "Sprites/SpiderMonkey - 3.png");
+         pop4 = getImage(getCodeBase(), "Sprites/SpiderMonkey - 4.png");
          
-         mainTheme = getAudioClip(getCodeBase(), "CS2-FinalProject/Music/MonkeySongFinal.wav");
-         bossTheme = getAudioClip(getCodeBase(), "CS2-FinalProject/Music/BadMonkeySongFinal.wav");
+         mainTheme = getAudioClip(getCodeBase(), "Music/MonkeySongFinal.wav");
+         bossTheme = getAudioClip(getCodeBase(), "Music/BadMonkeySongFinal.wav");
          
-         setSize(8005, 3923);
+         setSize(1601, 785);
          
          R = 150;
          G = 200;
@@ -187,7 +187,7 @@ public class EvolutionTrail extends Applet implements MouseListener
             g.setColor(Color.yellow);
             
             for(int i = 0; i < 6; i++){
-               g.drawString(" -", 306, 44+60*i);//Don't remove the space before the -
+               g.drawString("-", 306, 44+60*i);//Don't remove the space before the -
                g.drawString("+", 276, 44+60*i);
             } 
             
