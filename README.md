@@ -1,12 +1,12 @@
 # CS2-FinalProject
-  Oregon trail style population simulator ??
+  Oregon trail style population simulator. Similar to a text based RPG 
 ## User Scenario
-  Decide poulation stats, choose options for events, progress population to win
+  Decide poulation stats at th beginning, choose options for events and receive different outcomes based off of your population's stats, progress population by reproducing hunting and surviving events to win.
 ## Target Users
-  Gamers
+  Gamers, younger aged kids perhaps
 ## Project Description
-  Play as a population of an animal and progress your stats to overcome possible events
-  and succeed as a race.
+  Play as a population of monkeys and progress your stats to overcome possible events
+  and succeed in a fight against the evil gorilla
 ## Distribtuion of Work
 + Zane
   - Graphics
@@ -14,5 +14,8 @@
   - Population/Character
 + Ben
   - Events
+  - Image integration
+  - Music
 + Nick
   - Event Options
+  - Image integration
