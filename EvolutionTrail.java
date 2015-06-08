@@ -156,7 +156,9 @@ public class EvolutionTrail extends Applet implements MouseListener
          nextButtonyco = 372;
          nextButtonWidth = 50;
          nextButtonHeight = 20;
-      
+         
+         setBackground(Color.white);
+         
          addMouseListener(this);
       } 
       
@@ -249,7 +251,7 @@ public class EvolutionTrail extends Applet implements MouseListener
          }
          //Clicking next advances room by two for some reason, so I skipped a room number as a quick fix
          else if(room == 4){//Main Game
-            do{
+            if(pop.size > 1 && turns > 0){
                //REMOVE LATER
                System.out.println(pop.size);
                System.out.println(pop.food);
@@ -257,11 +259,11 @@ public class EvolutionTrail extends Applet implements MouseListener
                setBackground(new Color(R,G,B));
                if(pop.size < 50)
                   g.drawImage(pop1,0,0,this); //xy tbd
-               if(pop.size >= 50 && pop.size < 100)
+               else if(pop.size >= 50 && pop.size < 100)
                   g.drawImage(pop2,0,0,this); //xy tbd
-               if(pop.size >= 100 && pop.size < 150)
+               else if(pop.size >= 100 && pop.size < 150)
                   g.drawImage(pop3,0,0,this); //xy tbd
-               if(pop.size >= 150)
+               else
                   g.drawImage(pop4,0,0,this); //xy tbd
                EV.EventSelector();
                g.drawImage(setBg(EV.getEvID()),0,0,this);
@@ -284,7 +286,8 @@ public class EvolutionTrail extends Applet implements MouseListener
                   R -= 50;
                if(G>25)
                   G -= 25;
-            }while(pop.size > 1 && turns > 0);
+       
+            }
             System.out.println(pop.size); //REMOVE LATER
             if(pop.size < 2)
                room = 6;

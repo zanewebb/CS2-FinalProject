@@ -96,7 +96,7 @@ public class FinalBoss
          System.out.println("Game Over");
          win = false;
       }   
-      if(Pop.size == 1)
+      else if(Pop.size == 1)
       {
          System.out.println("Only one monkey remains. There is no way to repopulate the species. They are doomed to go extinct.");
          System.out.println("Game Over");
