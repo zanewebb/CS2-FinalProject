@@ -498,5 +498,5 @@ public class EvolutionTrail extends Applet implements MouseListener
       		paint(doubleG);
       		
       		g.drawImage(backBuffer, 0 ,0, this);
-      	} 
+      }
    }
