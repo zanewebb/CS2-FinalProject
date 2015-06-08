@@ -1,12 +1,25 @@
 import java.awt.*;
 import java.applet.*;
 import java.awt.event.*;
+import java.net.URL;
+import javax.imageio.ImageIO;
+import java.io.IOException;
+
 
 public class EvolutionTrail extends Applet implements MouseListener
 {
+      private Image backBuffer;
+      private Graphics doubleG;
+      
       Population pop = new Population();
+      Event EV = new Event();
       int xpos;
       int ypos;
+      
+      int turns;
+      int R;
+      int G;
+      int B;
       
       int posRect1xco,posRect1yco,posRect1width,posRect1height;
       int negRect1xco,negRect1yco,negRect1width,negRect1height;
@@ -26,8 +39,58 @@ public class EvolutionTrail extends Applet implements MouseListener
       
       int room; //This determines which screen is showing (0 = Title screen 1 = Stats, 2 = Ev Traits,
       
+      private Image img0 = null;
+      private Image img1 = null;
+      private Image img2 = null;
+      private Image img3 = null;
+      private Image img4 = null;
+      private Image img5 = null;
+      private Image img6 = null;
+      private Image img7 = null;
+      private Image img8 = null;
+      private Image img9 = null;
+      
+      private Image deadMonkey = null;
+      private Image rivalMonkeys = null;
+      
+      private Image pop1 = null;
+      private Image pop2 = null;
+      private Image pop3 = null;
+      private Image pop4 = null;
+      
+      private AudioClip mainTheme = null;
+      private AudioClip bossTheme = null;
+      
       public void init()
       {
+         img0 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Berries.png");
+         img1 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/JungleScene.png");//Forest
+         img2 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/JungleScene.png");//Attacked
+         img3 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/River.png");
+         img4 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Climb.png");
+         img5 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Disease.png");
+         img6 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Traps.png");
+         img7 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Forest Fire.png");
+         img8 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/JungleScene.png");//Accident
+         img9 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Clfif.png");//not a typo, image file is spelled like this
+         deadMonkey = getImage(getCodeBase(), "CS2-FinalProject/Sprites/dead monkey 2.png");
+         rivalMonkeys = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Enemy Monkeys - 4.png");
+         pop1 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 1");
+         pop2 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 2");
+         pop3 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 3");
+         pop4 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 4");
+         
+         mainTheme = getAudioClip(getCodeBase(), "CS2-FinalProject/Music/MonkeySongFinal.wav");
+         bossTheme = getAudioClip(getCodeBase(), "CS2-FinalProject/Music/BadMonkeySongFinal.wav");
+         
+         setSize(8005, 3923);
+         
+         R = 150;
+         G = 200;
+         B = 255;
+         
+         turns = 30;
+         
          room = 1; //change to 0 once we get a title card
          
          posRect1xco = 270;
@@ -91,18 +154,12 @@ public class EvolutionTrail extends Applet implements MouseListener
       
          addMouseListener(this);
       } 
-     
-      /*
-         Create a method for the beginning of the game
-         where you can click buttons to add to your stats.
-         Also, be able to choose your two traits for your
-         population. Possibly make this a different screen 
-         where it has a list of them and maybe a short description.
-      */
       
       public void paint(Graphics g)
       {
-         if(room == 0){
+         if(room == 0){//Title Screen
+            mainTheme.stop(); //if they play again so two don't start playing
+            mainTheme.loop();
             //paint some sort of title screen
          }
          if(room == 2){//Stats Screen
@@ -130,7 +187,7 @@ public class EvolutionTrail extends Applet implements MouseListener
             g.setColor(Color.yellow);
             
             for(int i = 0; i < 6; i++){
-               g.drawString("-", 306, 44+60*i);
+               g.drawString(" -", 306, 44+60*i);//Don't remove the space before the -
                g.drawString("+", 276, 44+60*i);
             } 
             
@@ -148,6 +205,7 @@ public class EvolutionTrail extends Applet implements MouseListener
             g.drawString("Extra Points: " + pop.extraPoints, 60, 386);
          }
          else if(room == 1){//Evolution Traits Screen
+            mainTheme.loop();          
             g.setColor(Color.gray);//reusing prev rectangles to save space
             g.fillRect(nextButtonxco,nextButtonyco,nextButtonWidth,nextButtonHeight);
             if(pop.PT == true)
@@ -186,21 +244,73 @@ public class EvolutionTrail extends Applet implements MouseListener
             g.drawString("Gives you more stat points to use.", 75, 320);
             g.drawString("Traits Left: " + pop.evPoints, 60, 386);   
          }
+         //Clicking next advances room by two for some reason, so I skipped a room number as a quick fix
+         else if(room == 4){//Main Game
+            do{
+               //REMOVE LATER
+               System.out.println(pop.size);
+               System.out.println(pop.food);
+               //
+               setBackground(new Color(R,G,B));
+               if(pop.size < 50)
+                  g.drawImage(pop1,0,0,this); //xy tbd
+               if(pop.size >= 50 && pop.size < 100)
+                  g.drawImage(pop2,0,0,this); //xy tbd
+               if(pop.size >= 100 && pop.size < 150)
+                  g.drawImage(pop3,0,0,this); //xy tbd
+               if(pop.size >= 150)
+                  g.drawImage(pop4,0,0,this); //xy tbd
+               EV.EventSelector();
+               g.drawImage(setBg(EV.getEvID()),0,0,this);
+               if(EV.getEvID() == 2){
+                  g.drawImage(rivalMonkeys,0,0,this); //xy tbd
+               }
+               if(EV.getEvID() == 8){
+                  g.drawImage(deadMonkey,0,0,this); //xy tbd
+               }
+               EV.RunEvent(pop);
+               turns--;
+               if(pop.food < pop.size){
+                  System.out.println("You are running out of food. " + (pop.size-pop.food) + " monkeys died of hunger.");
+                  pop.size -= (pop.size-pop.food);
+               }
+               pop.food -= pop.size;
+               if(pop.food < 0)
+                  pop.food = 0;
+               if(R>0)
+                  R -= 50;
+               if(G>25)
+                  G -= 25;
+            }while(pop.size > 1 && turns > 0);
+            System.out.println(pop.size); //REMOVE LATER
+            if(pop.size < 2)
+               room = 6;
+            else{
+               mainTheme.stop();
+               bossTheme.loop();
+               FinalBoss fb = new FinalBoss(pop);
+               fb.fight();
+               if(fb.isWin() == true)
+                  room = 5;
+               else
+                  room = 6;
+            }
+         }
+         
+         else if(room == 5){
+            bossTheme.stop();
+            mainTheme.loop();
+            System.out.println("You win");
+            //you win screen
+         }
+         
+         else if(room == 6){
+            bossTheme.stop();
+            mainTheme.loop();
+            System.out.println("You lose");
+            //you lose screen
+         }
       }
-      
-      /*
-         Create a method that randomly chooses which
-         event happens when you go to the next screen.
-         Make some events more likely than others
-         like the clearing and small traps. 
-         (Most likely nested inside the "room 3" if statement)
-      */
-      
-      /*
-         Need to make a boss/big end game event to
-         test the player's population and see if they
-         survive. 
-      */
       
       public void mousePressed (MouseEvent me) 
       {
@@ -321,9 +431,60 @@ public class EvolutionTrail extends Applet implements MouseListener
          repaint();
          me.consume();          
       }
+      
+      public Image setBg(int x){
+         if(x == 0){
+            return img0;
+         }
+         else if(x == 1){
+            return img1;
+         }
+         else if(x == 2){
+            return img2;
+         }
+         else if(x == 3){
+            return img3;
+         }
+         else if(x == 4){
+            return img4;
+         }
+         else if(x == 5){
+            return img5;
+         }
+         else if(x == 6){
+            return img6;
+         }
+         else if(x == 7){
+            return img7;
+         }
+         else if(x == 8){
+            return img8;
+         }
+         else if(x == 9){
+            return img9;
+         }
+         else
+            return null;
+      }
        
       public void mouseEntered (MouseEvent me) {} 
       public void mouseClicked (MouseEvent me) {} 
       public void mouseReleased (MouseEvent me) {}  
-      public void mouseExited (MouseEvent me) {}  
+      public void mouseExited (MouseEvent me) {} 
+      
+      @Override
+	   public void update(Graphics g) //double buffering
+   	{
+       	if(backBuffer == null)
+     		{
+     			backBuffer = createImage(this.getSize().width, this.getSize().height);	
+     			doubleG = backBuffer.getGraphics();
+      	}
+      		doubleG.setColor(getBackground());
+      		doubleG.fillRect(0, 0, this.getSize().width, this.getSize().height);
+      		doubleG.setColor(getForeground());
+      		paint(doubleG);
+      		
+      		g.drawImage(backBuffer, 0 ,0, this);
+      	} 
    }
