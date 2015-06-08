@@ -61,8 +61,13 @@ public class EvolutionTrail extends Applet implements MouseListener
       private AudioClip mainTheme = null;
       private AudioClip bossTheme = null;
       
+      boolean mainIsPlaying;
+      boolean bossIsPlaying;
+      
       public void init()
       {
+         mainIsPlaying = false;
+         bossIsPlaying = false;
          img0 = getImage(getCodeBase(), "Sprites/Berries.png");
          img1 = getImage(getCodeBase(), "Sprites/JungleScene.png");//Forest
          img2 = getImage(getCodeBase(), "Sprites/JungleScene.png");//Attacked
@@ -157,11 +162,6 @@ public class EvolutionTrail extends Applet implements MouseListener
       
       public void paint(Graphics g)
       {
-         if(room == 0){//Title Screen
-            mainTheme.stop(); //if they play again so two don't start playing
-            mainTheme.loop();
-            //paint some sort of title screen
-         }
          if(room == 2){//Stats Screen
             g.setColor(Color.blue);
             
@@ -205,7 +205,10 @@ public class EvolutionTrail extends Applet implements MouseListener
             g.drawString("Extra Points: " + pop.extraPoints, 60, 386);
          }
          else if(room == 1){//Evolution Traits Screen
-            mainTheme.loop();          
+            if(mainIsPlaying == false){
+               mainTheme.loop();
+               mainIsPlaying = true;
+            }    
             g.setColor(Color.gray);//reusing prev rectangles to save space
             g.fillRect(nextButtonxco,nextButtonyco,nextButtonWidth,nextButtonHeight);
             if(pop.PT == true)
@@ -287,7 +290,9 @@ public class EvolutionTrail extends Applet implements MouseListener
                room = 6;
             else{
                mainTheme.stop();
+               mainIsPlaying = false;
                bossTheme.loop();
+               mainIsPlaying = true;
                FinalBoss fb = new FinalBoss(pop);
                fb.fight();
                if(fb.isWin() == true)
@@ -299,14 +304,18 @@ public class EvolutionTrail extends Applet implements MouseListener
          
          else if(room == 5){
             bossTheme.stop();
+            bossIsPlaying = false;
             mainTheme.loop();
+            mainIsPlaying = true;
             System.out.println("You win");
             //you win screen
          }
          
          else if(room == 6){
             bossTheme.stop();
+            bossIsPlaying = false;
             mainTheme.loop();
+            mainIsPlaying = true;
             System.out.println("You lose");
             //you lose screen
          }
