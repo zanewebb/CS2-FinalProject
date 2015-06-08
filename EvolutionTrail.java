@@ -5,8 +5,12 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
+
 public class EvolutionTrail extends Applet implements MouseListener
 {
+      private Image backBuffer;
+      private Graphics doubleG;
+      
       Population pop = new Population();
       Event EV = new Event();
       int xpos;
@@ -54,69 +58,30 @@ public class EvolutionTrail extends Applet implements MouseListener
       private Image pop3 = null;
       private Image pop4 = null;
       
-      URL url0 = null;
-      URL url1 = null;
-      URL url2 = null;
-      URL url3 = null;
-      URL url4 = null;
-      URL url5 = null;
-      URL url6 = null;
-      URL url7 = null;
-      URL url8 = null;
-      URL url9 = null;
-      
-      URL dM = null;
-      URL rM = null;
-      
-      URL p1 = null;
-      URL p2 = null;
-      URL p3 = null;
-      URL p4 = null;
-      
       private AudioClip mainTheme = null;
       private AudioClip bossTheme = null;
       
       public void init()
       {
-         try{
-            url0 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Berries.png");
-            url1 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/JungleScene.png");//Forest
-            url2 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/JungleScene.png");//Attacked
-            url3 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/River.png");
-            url4 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Climb.png");
-            url5 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Disease.png");
-            url6 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Traps.png");
-            url7 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Forest Fire.png");
-            url8 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/JungleScene.png");//Accident
-            url9 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Clfif.png");//not a typo, image file is spelled like this
-            dM = new URL(getCodeBase(), "CS2-FinalProject/Sprites/dead monkey 2.png");
-            rM = new URL(getCodeBase(), "CS2-FinalProject/Sprites/Enemy Monkeys - 4.png");
-            p1 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 1");
-            p2 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 2");
-            p3 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 3");
-            p4 = new URL(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 4");
-            
-            img0 = ImageIO.read(url0);
-            img1 = ImageIO.read(url1);
-            img2 = ImageIO.read(url2);
-            img3 = ImageIO.read(url3);
-            img4 = ImageIO.read(url4);
-            img5 = ImageIO.read(url5);
-            img6 = ImageIO.read(url6);
-            img7 = ImageIO.read(url7);
-            img8 = ImageIO.read(url8);
-            img9 = ImageIO.read(url9);
-            pop1 = ImageIO.read(p1);
-            pop2 = ImageIO.read(p2);
-            pop3 = ImageIO.read(p3);
-            pop4 = ImageIO.read(p4);
-            deadMonkey = ImageIO.read(dM);
-            rivalMonkeys = ImageIO.read(rM);
-         }catch(IOException e){
-         }
+         img0 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Berries.png");
+         img1 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/JungleScene.png");//Forest
+         img2 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/JungleScene.png");//Attacked
+         img3 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/River.png");
+         img4 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Climb.png");
+         img5 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Disease.png");
+         img6 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Traps.png");
+         img7 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Forest Fire.png");
+         img8 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/JungleScene.png");//Accident
+         img9 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Clfif.png");//not a typo, image file is spelled like this
+         deadMonkey = getImage(getCodeBase(), "CS2-FinalProject/Sprites/dead monkey 2.png");
+         rivalMonkeys = getImage(getCodeBase(), "CS2-FinalProject/Sprites/Enemy Monkeys - 4.png");
+         pop1 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 1");
+         pop2 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 2");
+         pop3 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 3");
+         pop4 = getImage(getCodeBase(), "CS2-FinalProject/Sprites/SpiderMonkey - 4");
          
-         mainTheme = getAudioClip(getCodeBase(), "CS2-FinalProject/Music/MonkeyThemeFinal.wav");
-         bossTheme = getAudioClip(getCodeBase(), "CS2-FinalProject/Music/BadMonkeyThemeFinal.wav");
+         mainTheme = getAudioClip(getCodeBase(), "CS2-FinalProject/Music/MonkeySongFinal.wav");
+         bossTheme = getAudioClip(getCodeBase(), "CS2-FinalProject/Music/BadMonkeySongFinal.wav");
          
          setSize(8005, 3923);
          
@@ -189,18 +154,10 @@ public class EvolutionTrail extends Applet implements MouseListener
       
          addMouseListener(this);
       } 
-     
-      /*
-         Create a method for the beginning of the game
-         where you can click buttons to add to your stats.
-         Also, be able to choose your two traits for your
-         population. Possibly make this a different screen 
-         where it has a list of them and maybe a short description.
-      */
       
       public void paint(Graphics g)
       {
-         if(room == 0){
+         if(room == 0){//Title Screen
             mainTheme.stop(); //if they play again so two don't start playing
             mainTheme.loop();
             //paint some sort of title screen
@@ -230,7 +187,7 @@ public class EvolutionTrail extends Applet implements MouseListener
             g.setColor(Color.yellow);
             
             for(int i = 0; i < 6; i++){
-               g.drawString("-", 306, 44+60*i);
+               g.drawString(" -", 306, 44+60*i);//Don't remove the space before the -
                g.drawString("+", 276, 44+60*i);
             } 
             
@@ -248,6 +205,7 @@ public class EvolutionTrail extends Applet implements MouseListener
             g.drawString("Extra Points: " + pop.extraPoints, 60, 386);
          }
          else if(room == 1){//Evolution Traits Screen
+            mainTheme.loop();          
             g.setColor(Color.gray);//reusing prev rectangles to save space
             g.fillRect(nextButtonxco,nextButtonyco,nextButtonWidth,nextButtonHeight);
             if(pop.PT == true)
@@ -287,7 +245,7 @@ public class EvolutionTrail extends Applet implements MouseListener
             g.drawString("Traits Left: " + pop.evPoints, 60, 386);   
          }
          //Clicking next advances room by two for some reason, so I skipped a room number as a quick fix
-         else if(room == 4){//Main Game;
+         else if(room == 4){//Main Game
             do{
                //REMOVE LATER
                System.out.println(pop.size);
@@ -353,20 +311,6 @@ public class EvolutionTrail extends Applet implements MouseListener
             //you lose screen
          }
       }
-      
-      /*
-         Create a method that randomly chooses which
-         event happens when you go to the next screen.
-         Make some events more likely than others
-         like the clearing and small traps. 
-         (Most likely nested inside the "room 3" if statement)
-      */
-      
-      /*
-         Need to make a boss/big end game event to
-         test the player's population and see if they
-         survive. 
-      */
       
       public void mousePressed (MouseEvent me) 
       {
@@ -526,5 +470,21 @@ public class EvolutionTrail extends Applet implements MouseListener
       public void mouseEntered (MouseEvent me) {} 
       public void mouseClicked (MouseEvent me) {} 
       public void mouseReleased (MouseEvent me) {}  
-      public void mouseExited (MouseEvent me) {}  
+      public void mouseExited (MouseEvent me) {} 
+      
+      @Override
+	   public void update(Graphics g) //double buffering
+   	{
+       	if(backBuffer == null)
+     		{
+     			backBuffer = createImage(this.getSize().width, this.getSize().height);	
+     			doubleG = backBuffer.getGraphics();
+      	}
+      		doubleG.setColor(getBackground());
+      		doubleG.fillRect(0, 0, this.getSize().width, this.getSize().height);
+      		doubleG.setColor(getForeground());
+      		paint(doubleG);
+      		
+      		g.drawImage(backBuffer, 0 ,0, this);
+      	} 
    }
