@@ -93,7 +93,7 @@ public class EvolutionTrail extends Applet implements MouseListener
       mainTheme = getAudioClip(getCodeBase(), "Music/MonkeySongFinal.wav");
       bossTheme = getAudioClip(getCodeBase(), "Music/BadMonkeySongFinal.wav");
       
-      setSize(1601, 785);
+      setSize(/*1601*/600, 785);
       
       R = 150;
       G = 200;
@@ -165,7 +165,7 @@ public class EvolutionTrail extends Applet implements MouseListener
       setBackground(Color.white);
       
       addMouseListener(this);
-   } 
+   }
    
    public void paint(Graphics g)
    {
@@ -256,14 +256,15 @@ public class EvolutionTrail extends Applet implements MouseListener
       }
       //Clicking next advances room by two for some reason, so I skipped a room number as a quick fix
       else if(room == 4){//Main Game
-         g.drawString("Oh no! You forgot to adapt to have sight! Your monkeys are blind and cannot see the game!", 500,350);
-         g.drawString("Look at the console to play the game!",650,400);
+         g.drawString("Oh no! You forgot to adapt to have sight! Your monkeys are blind and cannot see the game!", 10,350);
+         g.drawString("Look at the console to play the game!",200,400);
          g.drawString("Population: " + pop.size,25,100);
          g.drawString("Food: " + pop.food,25,125);
+         repaint();
          if(pop.size > 1 && turns > 0){
             //REMOVE LATER
-            //System.out.println(pop.size);
-            //System.out.println(pop.food);
+            System.out.println(pop.size);
+            System.out.println(pop.food);
             //
             //setBackground(new Color(R,G,B));
             //repaint();           
@@ -301,8 +302,12 @@ public class EvolutionTrail extends Applet implements MouseListener
                R -= 50;
             if(G>25)
                G -= 25;
-            //g.setColor(new Color(R,G,B));
+            //g.setColor(Color.white);
             //g.fillRect(0,0,1601, 785);
+            /*g.drawString("Oh no! You forgot to adapt to have sight! Your monkeys are blind and cannot see the game!", 10,350);
+            g.drawString("Look at the console to play the game!",200,400);
+            g.drawString("Population: " + pop.size,25,100);
+            g.drawString("Food: " + pop.food,25,125);*/
          }
          else{
             System.out.println(pop.size); //REMOVE LATER
@@ -310,6 +315,7 @@ public class EvolutionTrail extends Applet implements MouseListener
             g.drawString("Look at the console to play the game!",650,400);
             g.drawString("Population: " + pop.size,25,100);
             g.drawString("Food: " + pop.food,25,125);
+            repaint();
 
             if(pop.size < 2)
                room = 6;
@@ -365,7 +371,7 @@ public class EvolutionTrail extends Applet implements MouseListener
             pop.St++;
             pop.extraPoints--; 
          }   
-         if (xpos>negRect1xco && xpos<negRect1xco + negRect1width && ypos>negRect1yco && ypos<negRect1yco + negRect1height && pop.De > 0){ 
+         if (xpos>negRect1xco && xpos<negRect1xco + negRect1width && ypos>negRect1yco && ypos<negRect1yco + negRect1height && pop.St > 0){ 
             pop.St--;
             pop.extraPoints++;
          }           
