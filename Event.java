@@ -11,7 +11,7 @@ public class Event {
       int x = rng.nextInt(100)+1;
       if(x <= 5)//5%
          evID = 0;
-      else if(x > 5 && x <= 25)//20%
+      else if(x > 5 && x <= 35)//30%
          evID = 1;
       else if(x > 25 && x <= 35)//10%
          evID = 2;
